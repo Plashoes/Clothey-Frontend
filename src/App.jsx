@@ -1,18 +1,21 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { ToastContainer } from 'react-toastify';
 
-import Homepage from "./Components/Homepage/Homepage";
-import Login from "./Components/Login/Login";
-import Signup from "./Components/Signup/Signup";
-import ResetPassword from "./Components/ResetPassword/ResetPassword";
+import Header from "./Components/Header";
+import Homepage from "./Components/Homepage";
+import Login from "./Components/Login";
+import Signup from "./Components/Signup";
+import ResetPassword from "./Components/ResetPassword";
 
 import './App.css'
+
 
 function App() {
 
   return (
     <div >
       <Router>
+      <Header />
         <Routes>
           <Route path="/" exact element={<Homepage />} />
           <Route path="/login" exact element={<Login />} />
