@@ -1,4 +1,3 @@
-import React from "react";
 
 function HowMade() {
   // grid-cols-4
@@ -20,7 +19,7 @@ function HowMade() {
           </div>
         </div>
         <div className="col-span-2">
-          <img className="" src="./public/images/recycled-shoe-store-how-shoes-are-made-image.png" alt="" />
+          <img className="" src="/images/recycled-shoe-store-how-shoes-are-made-image.png" alt="" />
         </div>
         <div>
           <div className="mt-4 md:mt-0">

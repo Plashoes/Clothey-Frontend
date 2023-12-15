@@ -7,19 +7,19 @@ function Testimonials() {
       </div>
       <div className="grid grid-cols-2 md:grid-cols-5 gap-12">
         <div>
-          <img src="./public/images/recycled-shoe-store-featured-in-logo-1.svg" alt="" />
+          <img src="/images/recycled-shoe-store-featured-in-logo-1.svg" alt="" />
         </div>
         <div>
-          <img src="./public/images/recycled-shoe-store-featured-in-logo-2.svg" alt="" />
+          <img src="/images/recycled-shoe-store-featured-in-logo-2.svg" alt="" />
         </div>
         <div>
-          <img src="./public/images/recycled-shoe-store-featured-in-logo-3.svg" alt="" />
+          <img src="/images/recycled-shoe-store-featured-in-logo-3.svg" alt="" />
         </div>
         <div>
-          <img src="./public/images/recycled-shoe-store-featured-in-logo-4.svg" alt="" />
+          <img src="/images/recycled-shoe-store-featured-in-logo-4.svg" alt="" />
         </div>
         <div>
-          <img src="./public/images/recycled-shoe-store-featured-in-logo-5.svg" alt="" />
+          <img src="/images/recycled-shoe-store-featured-in-logo-5.svg" alt="" />
         </div>
       </div>
     </div>

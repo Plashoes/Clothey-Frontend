@@ -2,7 +2,7 @@ function Info() {
   return (
     <div className="container mx-auto px-6 py-12 flex flex-col gap-10 md:gap-16 md:flex-row items-center">
       <div className="flex-1">
-        <img src="./public/images/recycled-shoe-store-home-about-image.jpg" alt="" />
+        <img src="/images/recycled-shoe-store-home-about-image.jpg" alt="" />
       </div>
       <div className="flex-1">
         <span className="text-[#f6aa28] font-medium text-lg">ABOUT US</span>

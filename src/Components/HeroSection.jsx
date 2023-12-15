@@ -1,6 +1,6 @@
 function HeroSection() {
   return (
-    <div className="container mx-auto px-6 py-12 bg-cover bg-center" style={{ backgroundImage: "url(./public/images/hero.jpg)" }}>
+    <div className="container mx-auto px-6 py-12 bg-cover bg-center" style={{ backgroundImage: "url(/images/hero.jpg)" }}>
       <div className="text-white w-full md:w-2/4">
         <h2 className="text-5xl lg:text-7xl text-center md:text-left font-bold mb-6">Love the Planet we walk on</h2>
         <p className="mb-6 text-xl text-center md:text-left font-light">Bibendum fermentum, aenean donec pretium aliquam blandit tempor imperdiet arcu arcu ut nunc in dictum mauris at ut.</p>
