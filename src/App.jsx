@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { ToastContainer } from 'react-toastify';
 
 import Header from "./Components/Header";
-import Homepage from "./Components/Homepage";
+import Homepage from "./Components/HomePage";
 import Login from "./Components/Login";
 import Signup from "./Components/Signup";
 import ResetPassword from "./Components/ResetPassword";
