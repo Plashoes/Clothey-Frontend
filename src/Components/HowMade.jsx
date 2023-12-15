@@ -1,6 +1,5 @@
 
 function HowMade() {
-  // grid-cols-4
   return (
     <div className="bg-[#f1f1ef] container mx-auto px-6 py-12">
       <h2 className="text-center mb-6 text-[#212529] font-semibold text-4xl">See how your shoes are made</h2>

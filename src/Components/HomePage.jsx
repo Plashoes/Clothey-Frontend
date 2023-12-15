@@ -1,15 +1,17 @@
 import HeroSection from "./HeroSection";
-import Testimonials from "./Testimonials";
+import Sponsors from "./Sponsors";
 import Info from "./Info";
 import HowMade from "./HowMade";
 import BestSellers from "./BestSellers";
 import NewArrivals from "./NewArrivals";
+import Recycle from "./Recycle";
+import Testimonials from "./Testimonials";
 
 function Homepage() {
   return (
     <div>
       <HeroSection />
-      <Testimonials />
+      <Sponsors />
       <Info />
       <HowMade />
       <BestSellers />
@@ -24,6 +26,8 @@ function Homepage() {
         </div>
       </div>
       <NewArrivals />
+      <Recycle />
+      <Testimonials />
     </div>
   )
 }
