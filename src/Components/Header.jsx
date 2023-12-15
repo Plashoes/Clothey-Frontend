@@ -33,12 +33,6 @@ function Header() {
 
         <ul className="lg:flex space-x-6 text-[#979a9b] hidden">
           <li className="hover:text-[#212529] duration-300 font-semibold cursor-pointer">
-            <p>MEN</p>
-          </li>
-          <li className="hover:text-[#212529] duration-300 font-semibold cursor-pointer">
-            <p>WOMEN</p>
-          </li>
-          <li className="hover:text-[#212529] duration-300 font-semibold cursor-pointer">
             <p>COLLECTION</p>
           </li>
           <li className="hover:text-[#212529] duration-300 font-semibold cursor-pointer">
@@ -71,13 +65,6 @@ function Header() {
             <i className="fa-solid fa-user text"></i>
           </li>
           </Link>
-          
-          <li className="text-xl border-b-2 border-[#e6e6e6] px-8 py-4 hover:text-[#212529] duration-300">
-            <p>MEN</p>
-          </li>
-          <li className="text-xl border-b-2 border-[#e6e6e6] px-8 py-4 hover:text-[#212529] duration-300">
-            <p>WOMEN</p>
-          </li>
           <li className="text-xl border-b-2 border-[#e6e6e6] px-8 py-4 hover:text-[#212529] duration-300">
             <p>COLLECTION</p>
           </li>

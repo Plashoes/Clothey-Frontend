@@ -6,6 +6,9 @@ import BestSellers from "./BestSellers";
 import NewArrivals from "./NewArrivals";
 import Recycle from "./Recycle";
 import Testimonials from "./Testimonials";
+import Features from "./Features";
+import FeaturesSmall from "./FeaturesSmall";
+import Footer from "./Footer";
 
 function Homepage() {
   return (
@@ -28,6 +31,9 @@ function Homepage() {
       <NewArrivals />
       <Recycle />
       <Testimonials />
+      <Features />
+      <FeaturesSmall />
+      <Footer />
     </div>
   )
 }
