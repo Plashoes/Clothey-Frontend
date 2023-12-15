@@ -2,7 +2,6 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { ToastContainer } from 'react-toastify';
 
 import Header from "./Components/Header";
-import Search from "./Components/Search";
 import Homepage from "./Components/HomePage";
 import Login from "./Components/Login";
 import Signup from "./Components/Signup";
@@ -17,7 +16,6 @@ function App() {
     <div >
       <Router>
       <Header />
-      <Search />
         <Routes>
           <Route path="/" exact element={<Homepage />} />
           <Route path="/login" exact element={<Login />} />

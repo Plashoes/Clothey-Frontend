@@ -1,3 +1,4 @@
+import Search from "./Search";
 import HeroSection from "./HeroSection";
 import Sponsors from "./Sponsors";
 import Info from "./Info";
@@ -13,6 +14,7 @@ import Footer from "./Footer";
 function Homepage() {
   return (
     <div>
+      <Search />
       <HeroSection />
       <Sponsors />
       <Info />
@@ -35,7 +37,7 @@ function Homepage() {
       <FeaturesSmall />
       <Footer />
     </div>
-  )
+  );
 }
 
-export default Homepage
+export default Homepage;
