@@ -18,8 +18,6 @@ function Header() {
       menu.current.classList.add("opacity-100");
       document.body.classList.add("overflow-hidden");
     }
-
-    menu.current.classList.remove("translate-x-[-786px]");
   };
   return (
     <div className="container mx-auto flex items-center justify-between p-6">
@@ -28,12 +26,14 @@ function Header() {
       </div>
       <div className="flex items-center">
         <Link to="/">
-          <h1 className="text-3xl font-semibold lg:mr-10">Plashoe</h1>
+          <h1 className="text-3xl font-semibold lg:mr-10">Clothey</h1>
         </Link>
 
         <ul className="lg:flex space-x-6 text-[#979a9b] hidden">
           <li className="hover:text-[#212529] duration-300 font-semibold cursor-pointer">
-            <p>COLLECTION</p>
+            <Link to="/collection">
+              <p>COLLECTION</p>
+            </Link>
           </li>
           <li className="hover:text-[#212529] duration-300 font-semibold cursor-pointer">
             <p>LOOKBOOK</p>
@@ -61,9 +61,9 @@ function Header() {
         </button>
         <ul className="text-[#979a9b] ">
           <Link to="/login" onClick={toggleMenu}>
-          <li className="text-xl border-b-2 border-[#e6e6e6] px-8 py-4 hover:text-[#212529] duration-300">
-            <i className="fa-solid fa-user text"></i>
-          </li>
+            <li className="text-xl border-b-2 border-[#e6e6e6] px-8 py-4 hover:text-[#212529] duration-300">
+              <i className="fa-solid fa-user text"></i>
+            </li>
           </Link>
           <li className="text-xl border-b-2 border-[#e6e6e6] px-8 py-4 hover:text-[#212529] duration-300">
             <p>COLLECTION</p>
