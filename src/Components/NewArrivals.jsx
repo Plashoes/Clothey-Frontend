@@ -1,7 +1,9 @@
-
-import ProductsGrid from './ProductsGrid';
+import { useState } from "react";
+import ProductsGrid from "./ProductsGrid";
+import Skeleton from "@mui/material/Skeleton";
 
 function NewArrivals() {
+  const [fetching, setFetching] = useState(false);
 
   const cardsInfo = [
     {
@@ -49,7 +51,7 @@ function NewArrivals() {
       name: "Women’s Peach Training",
       price: "57.90",
     },
-  ]
+  ];
 
   return (
     <div className="container mx-auto px-6 py-12">
@@ -57,8 +59,21 @@ function NewArrivals() {
         <h3 className="text-[#212529] text-3xl my-3">New Arrivals</h3>
         <button className="font-semibold text-[#212529] pb-1 hover:border-[#262b2c] duration-300 border-b-2 border-[#f6aa28]">VIEW ALL NEW ARRIVALS</button>
       </div>
-      <ProductsGrid cardsInfo={cardsInfo} />
+      {fetching ? (
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+          <Skeleton variant="rectangle" animation="wave" width="100%" height={300} />
+          <Skeleton variant="rectangle" animation="wave" width="100%" height={300} />
+          <Skeleton variant="rectangle" animation="wave" width="100%" height={300} />
+          <Skeleton variant="rectangle" animation="wave" width="100%" height={300} />
+          <Skeleton variant="rectangle" animation="wave" width="100%" height={300} />
+          <Skeleton variant="rectangle" animation="wave" width="100%" height={300} />
+          <Skeleton variant="rectangle" animation="wave" width="100%" height={300} />
+          <Skeleton variant="rectangle" animation="wave" width="100%" height={300} />
+        </div>
+      ) : (
+        <ProductsGrid cardsInfo={cardsInfo} />
+      )}
     </div>
   );
-  }
-export default NewArrivals
+}
+export default NewArrivals;

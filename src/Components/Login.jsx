@@ -12,7 +12,7 @@ function Login() {
 
   return (
     <div className="bg-[#212529]">
-      <div className="container mx-auto flex justify-center items-center h-screen ">
+      <div className="container mx-auto flex justify-center items-center login ">
         <div className="py-6 px-10 shadow-md rounded-xl bg-white">
           <h2 className="text-center font-bold text-3xl mb-4 text-[#212529]">Login</h2>
           <div className="flex flex-col space-y-2 mb-5 md:w-[300px]">
