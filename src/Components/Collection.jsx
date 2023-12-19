@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import Skeleton from "@mui/material/Skeleton";
 import Search from "./Search";
 import Features from "./Features";
@@ -15,12 +15,12 @@ function Collection() {
     },
     {
       imgURL: "/images/recycled-shoe-product-image-009-400x400.jpg",
-      name: "Women’s Tan Sneaker",
+      name: "Women's Tan Sneaker",
       price: "80.00",
     },
     {
       imgURL: "/images/recycled-shoe-product-image-011-400x400.jpg",
-      name: "Women’s Peach Training",
+      name: "Women's Peach Training",
       price: "57.90",
     },
     {
@@ -30,12 +30,12 @@ function Collection() {
     },
     {
       imgURL: "/images/recycled-shoe-product-image-009-400x400.jpg",
-      name: "Women’s Tan Sneaker",
+      name: "Women's Tan Sneaker",
       price: "80.00",
     },
     {
       imgURL: "/images/recycled-shoe-product-image-011-400x400.jpg",
-      name: "Women’s Peach Training",
+      name: "Women's Peach Training",
       price: "57.90",
     },
   ]);

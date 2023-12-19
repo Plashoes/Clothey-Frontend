@@ -1,7 +1,7 @@
 
-function HowMade() {
+function HowMade({bg}) {
   return (
-    <div className="bg-[#f1f1ef] container mx-auto px-6 py-12">
+    <div className={`bg-[${bg}] container mx-auto px-6 py-12`}>
       <h2 className="text-center mb-6 text-[#212529] font-semibold text-4xl">See how your shoes are made</h2>
       <p className="text-center text-xl text-[#979a9b] md:w-3/5 mx-auto mb-14">Urna, felis enim orci accumsan urna blandit egestas mattis egestas feugiat viverra ornare donec adipiscing semper aliquet integer risus leo volutpat nulla enim ultrices</p>
       <div className="grid grid-cols-1 md:grid-cols-4 items-center">

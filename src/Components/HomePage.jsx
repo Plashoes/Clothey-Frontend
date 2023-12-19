@@ -18,7 +18,7 @@ function Homepage() {
       <HeroSection />
       <Sponsors />
       <Info />
-      <HowMade />
+      <HowMade bg={"#f1f1ef"}/>
       <BestSellers />
       <div className="md:flex xl:space-x-10 xl:p-10">
         <div className="md:flex-1 bg-cover bg-center flex flex-col space-y-3 justify-center items-center px-12 py-20 xl:py-[100px]" style={{ backgroundImage: "url(/images/recycled-shoe-store-shop-men-image-thumbnail.jpg)" }}>
