@@ -7,6 +7,7 @@ import Login from "./Components/Login";
 import Signup from "./Components/Signup";
 import ResetPassword from "./Components/ResetPassword";
 import Collection from "./Components/Collection";
+import Lookbook from "./Components/Lookbook";
 
 import './App.css'
 
@@ -22,7 +23,8 @@ function App() {
           <Route path="/login" exact element={<Login />} />
           <Route path="/signup" exact element={<Signup />} />
           <Route path="/reset-password" exact element={<ResetPassword />} />
-          <Route path="Collection" exact element={<Collection />} />
+          <Route path="/collection" exact element={<Collection />} />
+          <Route path="/lookbook" exact element={<Lookbook />} />
         </Routes>
         <ToastContainer autoClose={2500} theme="dark" newestOnTop={true} />
       </Router>

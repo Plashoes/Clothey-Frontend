@@ -1,4 +1,3 @@
-
 function Features() {
   return (
     <div className="px-6 py-12 md:py-[120px] bg-cover bg-center" style={{ backgroundImage: "url(/images/recycled-shoe-store-cta-image-bg.jpg)" }}>

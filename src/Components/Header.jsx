@@ -35,17 +35,25 @@ function Header() {
               <p>COLLECTION</p>
             </Link>
           </li>
-          <li className="hover:text-[#212529] duration-300 font-semibold cursor-pointer">
-            <p>LOOKBOOK</p>
-          </li>
-          <li className="hover:text-[#212529] duration-300 font-semibold cursor-pointer">
-            <p>SALE</p>
-          </li>
+          <Link to="/lookbook">
+            <li className="hover:text-[#212529] duration-300 font-semibold cursor-pointer">
+              <p>LOOKBOOK</p>
+            </li>
+          </Link>
+          <Link to="/sale">
+            <li className="hover:text-[#212529] duration-300 font-semibold cursor-pointer">
+              <p>SALE</p>
+            </li>
+          </Link>
         </ul>
       </div>
       <div className="flex items-center lg:space-x-6 text-[#979a9b]">
-        <p className="hover:text-[#212529] duration-300 font-semibold cursor-pointer hidden lg:block">OUR STORY</p>
-        <p className="hover:text-[#212529] duration-300 font-semibold cursor-pointer hidden lg:block">CONTACT</p>
+        <Link to="/our-story">
+          <p className="hover:text-[#212529] duration-300 font-semibold cursor-pointer hidden lg:block">OUR STORY</p>
+        </Link>
+        <Link to="/contact">
+          <p className="hover:text-[#212529] duration-300 font-semibold cursor-pointer hidden lg:block">CONTACT</p>
+        </Link>
         <p>
           <i className="fa-solid fa-bag-shopping text-[#212529] text-2xl lg:text-lg xl:text-3xl cursor-pointer"></i>
         </p>
@@ -55,7 +63,7 @@ function Header() {
           </p>
         </Link>
       </div>
-      <div ref={menu} className="absolute w-screen h-screen opacity-100 bg-white top-0 left-[-25000px]  py-16 transition-all duration-300">
+      <div ref={menu} className="absolute w-screen h-screen opacity-100 bg-white top-0 left-[-25000px]  py-16 transition-all duration-300 z-[3]">
         <button className="absolute right-0 top-0 p-4 text-[#979a9b] hover:text-[#212529] duration-300" onClick={toggleMenu}>
           <i className="fa-solid fa-x text-3xl "></i>
         </button>
@@ -65,21 +73,31 @@ function Header() {
               <i className="fa-solid fa-user text"></i>
             </li>
           </Link>
-          <li className="text-xl border-b-2 border-[#e6e6e6] px-8 py-4 hover:text-[#212529] duration-300">
-            <p>COLLECTION</p>
-          </li>
-          <li className="text-xl border-b-2 border-[#e6e6e6] px-8 py-4 hover:text-[#212529] duration-300">
-            <p>LOOKBOOK</p>
-          </li>
-          <li className="text-xl border-b-2 border-[#e6e6e6] px-8 py-4 hover:text-[#212529] duration-300">
-            <p>SALE</p>
-          </li>
-          <li className="text-xl border-b-2 border-[#e6e6e6] px-8 py-4 hover:text-[#212529] duration-300">
-            <p>OUR STORY</p>
-          </li>
-          <li className="text-xl border-b-2 border-[#e6e6e6] px-8 py-4 hover:text-[#212529] duration-300">
-            <p>CONTACT</p>
-          </li>
+          <Link to="/collection" onClick={toggleMenu}>
+            <li className="text-xl border-b-2 border-[#e6e6e6] px-8 py-4 hover:text-[#212529] duration-300">
+              <p>COLLECTION</p>
+            </li>
+          </Link>
+          <Link to="/lookbook" onClick={toggleMenu}>
+            <li className="text-xl border-b-2 border-[#e6e6e6] px-8 py-4 hover:text-[#212529] duration-300">
+              <p>LOOKBOOK</p>
+            </li>
+          </Link>
+          <Link to="/sale" onClick={toggleMenu}>
+            <li className="text-xl border-b-2 border-[#e6e6e6] px-8 py-4 hover:text-[#212529] duration-300">
+              <p>SALE</p>
+            </li>
+          </Link>
+          <Link to="/our-story" onClick={toggleMenu}>
+            <li className="text-xl border-b-2 border-[#e6e6e6] px-8 py-4 hover:text-[#212529] duration-300">
+              <p>OUR STORY</p>
+            </li>
+          </Link>
+          <Link to="/contact" onClick={toggleMenu}>
+            <li className="text-xl border-b-2 border-[#e6e6e6] px-8 py-4 hover:text-[#212529] duration-300">
+              <p>CONTACT</p>
+            </li>
+          </Link>
         </ul>
       </div>
     </div>

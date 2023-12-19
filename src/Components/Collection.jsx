@@ -82,19 +82,51 @@ function Collection() {
             </select>
           </div>
           {fetching ? (
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-              <Skeleton variant="rectangle" animation="wave" width="100%" height={300} />
-              <Skeleton variant="rectangle" animation="wave" width="100%" height={300} />
-              <Skeleton variant="rectangle" animation="wave" width="100%" height={300} />
-              <Skeleton variant="rectangle" animation="wave" width="100%" height={300} />
-              <Skeleton variant="rectangle" animation="wave" width="100%" height={300} />
-              <Skeleton variant="rectangle" animation="wave" width="100%" height={300} />
-              <Skeleton variant="rectangle" animation="wave" width="100%" height={300} />
-              <Skeleton variant="rectangle" animation="wave" width="100%" height={300} />
-            </div>
-          ) : (
-            <ProductsGrid cardsInfo={cardsInfo} />
-          )}
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+          <div>
+            <Skeleton variant="rectangle" animation="wave" width="100%" height={250} />
+            <Skeleton variant="text" animation="wave"/>
+            <Skeleton variant="text" animation="wave"/>
+          </div>
+          <div>
+            <Skeleton variant="rectangle" animation="wave" width="100%" height={250} />
+            <Skeleton variant="text" animation="wave"/>
+            <Skeleton variant="text" animation="wave"/>
+          </div>
+          <div>
+            <Skeleton variant="rectangle" animation="wave" width="100%" height={250} />
+            <Skeleton variant="text" animation="wave"/>
+            <Skeleton variant="text" animation="wave"/>
+          </div>
+          <div>
+            <Skeleton variant="rectangle" animation="wave" width="100%" height={250} />
+            <Skeleton variant="text" animation="wave"/>
+            <Skeleton variant="text" animation="wave"/>
+          </div>
+          <div>
+            <Skeleton variant="rectangle" animation="wave" width="100%" height={250} />
+            <Skeleton variant="text" animation="wave"/>
+            <Skeleton variant="text" animation="wave"/>
+          </div>
+          <div>
+            <Skeleton variant="rectangle" animation="wave" width="100%" height={250} />
+            <Skeleton variant="text" animation="wave"/>
+            <Skeleton variant="text" animation="wave"/>
+          </div>
+          <div>
+            <Skeleton variant="rectangle" animation="wave" width="100%" height={250} />
+            <Skeleton variant="text" animation="wave"/>
+            <Skeleton variant="text" animation="wave"/>
+          </div>
+          <div>
+            <Skeleton variant="rectangle" animation="wave" width="100%" height={250} />
+            <Skeleton variant="text" animation="wave"/>
+            <Skeleton variant="text" animation="wave"/>
+          </div>
+        </div>
+      ) : (
+        <ProductsGrid cardsInfo={cardsInfo} />
+      )}
         </div>
       </div>
       <Features />
