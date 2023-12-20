@@ -11,7 +11,7 @@ function Signup() {
   };
   return (
     <div className="bg-[#212529]">
-      <div className="container mx-auto flex justify-center items-center h-screen p-8 sm:p-0 ">
+      <div className="container mx-auto flex justify-center items-center h-[115vh]  px-8 pt-12 md:pt-0 sm:p-0 ">
         <div className="py-6 px-10 shadow-md rounded-xl bg-white">
           <h2 className="text-center font-bold text-2xl sm:text-3xl mb-4 text-[#212529]">Sign Up</h2>
           <div className="flex flex-col sm:flex-row sm:space-x-6">
