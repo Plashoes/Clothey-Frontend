@@ -9,6 +9,8 @@ import ResetPassword from "./Components/ResetPassword";
 import Collection from "./Components/Collection";
 import Lookbook from "./Components/Lookbook";
 import OurStory from "./Components/OurStory";
+import Contact from "./Components/Contact";
+import Sale from "./Components/Sale";
 
 import './App.css'
 
@@ -27,6 +29,8 @@ function App() {
           <Route path="/collection" exact element={<Collection />} />
           <Route path="/lookbook" exact element={<Lookbook />} />
           <Route path="/our-story" exact element={<OurStory />} />
+          <Route path="/contact" exact element={<Contact />} />
+          <Route path="/sale" exact element={<Sale />} />
         </Routes>
         <ToastContainer autoClose={2500} theme="dark" newestOnTop={true} />
       </Router>
