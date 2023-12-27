@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react";
+import axios from "axios";
 import Skeleton from "@mui/material/Skeleton";
 import Search from "./Search";
 import Features from "./Features";
@@ -7,6 +8,22 @@ import Footer from "./Footer";
 import ProductsGrid from "./ProductsGrid";
 
 function Collection() {
+  const URL = "https://clotheyapi-production.up.railway.app/products/filter";
+
+
+  useEffect(() => {
+    document.title = `Clothy | Collection`;
+    window.scrollTo(0, 0);
+  }, []);
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      await axios.get(URL).then((res) => console.log(res)).catch((e) => console.log(e));
+    }
+    fetchProducts();
+  }, [])
+
+
   const [cardsInfo, setCardsInfo] = useState([
     {
       imgURL: "/images/recycled-shoe-product-image-004-400x400.jpg",
@@ -69,7 +86,7 @@ function Collection() {
   return (
     <>
       <Search />
-      <div className="bg-[#f1f1ef] py-6 px-3 md:px-8 md:pb-12 md:pt-6">
+      <div className="bg-[#f1f1ef] pb-6 px-3 md:px-8 md:pb-12">
         <div className="bg-white p-8">
           <h2 className="text-[#6e7051] text-3xl sm:text-4xl font-bold mb-6">Products</h2>
           <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:items-center sm:justify-between mb-8">

@@ -1,9 +1,16 @@
+import { useEffect } from "react";
 import Search from "./Search";
 import Features from "./Features";
 import FeaturesSmall from "./FeaturesSmall";
 import Footer from "./Footer";
 
 function Lookbook() {
+
+  useEffect(() => {
+    document.title = `Clothy | Lookbook`;
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <>
       <Search />

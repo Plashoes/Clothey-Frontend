@@ -1,13 +1,45 @@
+import axios from "axios";
 import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
 
 import "react-toastify/dist/ReactToastify.css";
+import { useState } from "react";
 
 function Login() {
-  const attemptLogin = () => {
+  const URL = "https://clotheyapi-production.up.railway.app/users/signin";
+  const regEmail = /^\w+([\\.-]?\w+)*@\w+([\\.-]?\w+)*(\.\w{2,3})+$/;
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const attemptLogin = async () => {
+    if (email === "") {
+      toast.error("Enter Email");
+      return;
+    }
+    if(!regEmail.test(email)) {
+      toast.error("Enter Correct Email");
+      return;
+    }
+    if (password === "") {
+      toast.error("Enter Password");
+      return;
+    }
     toast.info("Attempting Login");
-    // toast.success("Login Successful");
-    // toast.error("Login Failed");
+    await axios
+      .post(URL, { email, password })
+      .then((res) => {
+        toast.success("Login Successful");
+        console.log(res);
+        localStorage.setItem("email", res.email);
+        localStorage.setItem("firstName", res.first_name);
+        localStorage.setItem("lastName", res.last_name);
+        localStorage.setItem("phoneNumber", res.phone_number);
+        localStorage.setItem("userToken", res.authorization_token);
+      })
+      .catch((e) => {
+        console.log(e);
+        toast.error("Incorrect Email Or Password");
+      });
   };
 
   return (
@@ -17,11 +49,11 @@ function Login() {
           <h2 className="text-center font-bold text-3xl mb-4 text-[#212529]">Login</h2>
           <div className="flex flex-col space-y-2 mb-5 md:w-[300px]">
             <span className="text-lg font-semibold text-[#212529]">Email</span>
-            <input className="bg-white border-b-2 border-[#e6e6e6] focus:placeholder-transparent placeholder:duration-300 focus:outline-none" placeholder="Enter Email" type="text" />
+            <input className="bg-white border-b-2 border-[#e6e6e6] focus:placeholder-transparent placeholder:duration-300 focus:outline-none" placeholder="Enter Email" type="text" onChange={(e) => setEmail(e.target.value)} />
           </div>
           <div className="flex flex-col space-y-2 mb-5 md:w-[300px]">
             <span className="text-lg font-semibold text-[#212529]">Password</span>
-            <input className="bg-white border-b-2 border-[#e6e6e6] focus:placeholder-transparent placeholder:duration-300 focus:outline-none" placeholder="Enter Password" type="Password" />
+            <input className="bg-white border-b-2 border-[#e6e6e6] focus:placeholder-transparent placeholder:duration-300 focus:outline-none" placeholder="Enter Password" type="Password" onChange={(e) => setPassword(e.target.value)} />
             <Link to="/reset-password" className="">
               <p className="text-right text-xs md:text-base font-bold text-[#212529]">Forgot Password ?</p>
             </Link>

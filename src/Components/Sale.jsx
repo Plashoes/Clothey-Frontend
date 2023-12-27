@@ -1,5 +1,5 @@
 import Search from "./Search";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ProductsGrid from "./ProductsGrid";
 import Skeleton from "@mui/material/Skeleton";
 import Features from "./Features";
@@ -7,6 +7,12 @@ import FeaturesSmall from "./FeaturesSmall";
 import Footer from "./Footer";
 
 function Sale() {
+
+  useEffect(() => {
+    document.title = `Clothy | Sale`;
+    window.scrollTo(0, 0);
+  }, []);
+
   const [fetching, setFetching] = useState(false);
 
   const cardsInfo = [
