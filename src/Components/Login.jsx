@@ -33,7 +33,7 @@ function Login() {
     await axios
       .post(URL, { email, password })
       .then((res) => {
-        toast.success("Login Successful");
+        toast.success("Login Successful!");
         appDispatch({type: "login"});
         localStorage.setItem("email", res.data.email);
         localStorage.setItem("firstName", res.data.first_name);

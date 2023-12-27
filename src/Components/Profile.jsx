@@ -1,6 +1,9 @@
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import DispatchContext from "../DispatchContext";
+import { toast } from "react-toastify";
+
+import "react-toastify/dist/ReactToastify.css";
 
 function Profile() {
   const appDispatch = useContext(DispatchContext);
@@ -17,6 +20,7 @@ function Profile() {
     localStorage.removeItem("email");
     localStorage.removeItem("phoneNumber");
     localStorage.removeItem("userToken");
+    toast.info("Logout Out Successful");
     navigate("/");
   }
 
