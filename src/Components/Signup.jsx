@@ -2,10 +2,12 @@ import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
 
 import "react-toastify/dist/ReactToastify.css";
-import { useState } from "react";
+import { useState, useContext } from "react";
+import DispatchContext from "../DispatchContext";
 import axios from "axios";
 
 function Signup() {
+  const appDispatch = useContext(DispatchContext);
   const URL = "https://clotheyapi-production.up.railway.app/users/signup";
   const regCharectars = /^[A-Za-z\s]*$/;
   const regNumbers = /^[0-9]+$/;
@@ -69,6 +71,12 @@ function Signup() {
     axios.post(URL, {first_name, last_name, email, password, phone_number}).then((res) => {
       toast.success("Sign Up Successful!");
       console.log(res);
+        appDispatch({type: "login"});
+        localStorage.setItem("email", res.data.email);
+        localStorage.setItem("firstName", res.data.first_name);
+        localStorage.setItem("lastName", res.data.last_name);
+        localStorage.setItem("phoneNumber", res.data.phone_number);
+        localStorage.setItem("userToken", res.data.authorization_token);
     }).catch((e) => {
       console.log(e);
       toast.error("Error Occurred Please Try Again");

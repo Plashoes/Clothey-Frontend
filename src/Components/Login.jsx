@@ -1,11 +1,16 @@
+import { useState, useContext } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import DispatchContext from "../DispatchContext";
 
 import "react-toastify/dist/ReactToastify.css";
-import { useState } from "react";
+
 
 function Login() {
+  const appDispatch = useContext(DispatchContext);
+  const navigate = useNavigate();
+
   const URL = "https://clotheyapi-production.up.railway.app/users/signin";
   const regEmail = /^\w+([\\.-]?\w+)*@\w+([\\.-]?\w+)*(\.\w{2,3})+$/;
   const [email, setEmail] = useState("");
@@ -29,12 +34,13 @@ function Login() {
       .post(URL, { email, password })
       .then((res) => {
         toast.success("Login Successful");
-        console.log(res);
-        localStorage.setItem("email", res.email);
-        localStorage.setItem("firstName", res.first_name);
-        localStorage.setItem("lastName", res.last_name);
-        localStorage.setItem("phoneNumber", res.phone_number);
-        localStorage.setItem("userToken", res.authorization_token);
+        appDispatch({type: "login"});
+        localStorage.setItem("email", res.data.email);
+        localStorage.setItem("firstName", res.data.first_name);
+        localStorage.setItem("lastName", res.data.last_name);
+        localStorage.setItem("phoneNumber", res.data.phone_number);
+        localStorage.setItem("userToken", res.data.authorization_token);
+        navigate("/profile");
       })
       .catch((e) => {
         console.log(e);

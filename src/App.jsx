@@ -16,6 +16,7 @@ import OurStory from "./Components/OurStory";
 import Contact from "./Components/Contact";
 import Sale from "./Components/Sale";
 import Product from "./Components/Product";
+import Profile from "./Components/Profile";
 
 import "./App.css";
 
@@ -69,6 +70,7 @@ function App() {
             <Route path="/contact" exact element={<Contact />} />
             <Route path="/sale" exact element={<Sale />} />
             <Route path="/product/:id" exact element={<Product />} />
+            <Route path="/profile" exact element={<Profile />} />
           </Routes>
           <ToastContainer autoClose={2500} theme="dark" newestOnTop={true} />
         </Router>
