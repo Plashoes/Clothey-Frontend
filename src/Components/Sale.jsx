@@ -71,7 +71,7 @@ function Sale() {
           <h3 className="text-[#212529] text-3xl my-3">Last Pairs</h3>
           <button className="font-semibold text-[#212529] pb-1 hover:border-[#262b2c] duration-300 border-b-2 border-[#f6aa28]">VIEW ALL PRODUCTS</button>
         </div>
-        {fetching ? (
+        {/* {fetching ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
             <div>
               <Skeleton variant="rectangle" animation="wave" width="100%" height={250} />
@@ -116,7 +116,7 @@ function Sale() {
           </div>
         ) : (
           <ProductsGrid cardsInfo={cardsInfo} />
-        )}
+        )} */}
       </div>
       <Features />
       <FeaturesSmall />

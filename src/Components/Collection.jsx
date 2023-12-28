@@ -9,6 +9,7 @@ import ProductsGrid from "./ProductsGrid";
 
 function Collection() {
   const URL = "https://clotheyapi-production.up.railway.app/products/filter";
+  const [products, setProducts] = useState([]);
 
 
   useEffect(() => {
@@ -18,69 +19,41 @@ function Collection() {
 
   useEffect(() => {
     const fetchProducts = async () => {
-      await axios.get(URL).then((res) => console.log(res)).catch((e) => console.log(e));
+      await axios.get(URL)
+      .then((res) => {
+        setProducts(res.data);
+        setFetching(false);
+      })
+      .catch((e) => console.log(e));
     }
     fetchProducts();
   }, [])
 
 
-  const [cardsInfo, setCardsInfo] = useState([
-    {
-      imgURL: "/images/recycled-shoe-product-image-004-400x400.jpg",
-      name: "Women's Orange Sneaker",
-      price: "44.90",
-    },
-    {
-      imgURL: "/images/recycled-shoe-product-image-009-400x400.jpg",
-      name: "Women's Tan Sneaker",
-      price: "80.00",
-    },
-    {
-      imgURL: "/images/recycled-shoe-product-image-011-400x400.jpg",
-      name: "Women's Peach Training",
-      price: "57.90",
-    },
-    {
-      imgURL: "/images/recycled-shoe-product-image-004-400x400.jpg",
-      name: "Women's Orange Sneaker",
-      price: "44.90",
-    },
-    {
-      imgURL: "/images/recycled-shoe-product-image-009-400x400.jpg",
-      name: "Women's Tan Sneaker",
-      price: "80.00",
-    },
-    {
-      imgURL: "/images/recycled-shoe-product-image-011-400x400.jpg",
-      name: "Women's Peach Training",
-      price: "57.90",
-    },
-  ]);
-
-  const [fetching, setFetching] = useState(false);
+  const [fetching, setFetching] = useState(true);
 
   const select = useRef(null);
 
   useEffect(() => {
     let sortingOrder = select.current.value;
-    let tempArray = [...cardsInfo];
+    let tempArray = [...products];
     if (sortingOrder === "lth") {
-      tempArray.sort((a, b) => parseFloat(a.price) - parseFloat(b.price));
+      tempArray.sort((a, b) => parseFloat(a.inventory.price) - parseFloat(b.inventory.price));
     } else {
-      tempArray.sort((a, b) => parseFloat(b.price) - parseFloat(a.price));
+      tempArray.sort((a, b) => parseFloat(b.inventory.price) - parseFloat(a.inventory.price));
     }
-    setCardsInfo(tempArray);
+    setProducts(tempArray);
   }, []);
 
   const handleSort = (e) => {
     let sortingOrder = e.target.value;
-    let tempArray = [...cardsInfo];
+    let tempArray = [...products];
     if (sortingOrder === "lth") {
-      tempArray.sort((a, b) => parseFloat(a.price) - parseFloat(b.price));
+      tempArray.sort((a, b) => parseFloat(a.inventory.price) - parseFloat(b.inventory.price));
     } else {
-      tempArray.sort((a, b) => parseFloat(b.price) - parseFloat(a.price));
+      tempArray.sort((a, b) => parseFloat(b.inventory.price) - parseFloat(a.inventory.price));
     }
-    setCardsInfo(tempArray);
+    setProducts(tempArray);
   };
 
   return (
@@ -90,9 +63,10 @@ function Collection() {
         <div className="bg-white p-8">
           <h2 className="text-[#6e7051] text-3xl sm:text-4xl font-bold mb-6">Products</h2>
           <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:items-center sm:justify-between mb-8">
-            <span className="text-[#979a9b] lg:text-xl">Showing all {cardsInfo.length} results</span>
+            <span className="text-[#979a9b] lg:text-xl">Showing all {products.length} results</span>
             <select ref={select} onChange={handleSort} name="Sort Products" id="" className="lg:text-xl border-2 border-[#e6e6e6] py-2 text-[#666] focus:outline-none sm:w-[300px]">
-              <option defaultValue={true} value="lth">
+              <option defaultValue={true}>Default</option>
+              <option value="lth">
                 Price Low To High
               </option>
               <option value="htl">Price High To Low</option>
@@ -142,7 +116,7 @@ function Collection() {
           </div>
         </div>
       ) : (
-        <ProductsGrid cardsInfo={cardsInfo} />
+        <ProductsGrid cardsInfo={products} />
       )}
         </div>
       </div>

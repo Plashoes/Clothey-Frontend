@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 function Footer() {
   return (
     <div className="border-t-2 border-[#e4e6e7] bg-white container mx-auto px-6 lg:px-16 py-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -9,13 +11,13 @@ function Footer() {
         <h3 className="text-3xl font-semibold mb-6 text-center lg:text-left">Shop</h3>
         <ul className="text-lg sm:text-xl lg:text-2xl text-center lg:text-left flex flex-col space-y-3">
           <li className="text-[#979a9b] mx-auto lg:mx-0 hover:text-[#212529] duration-300 w-fit">
-            <a href="">Collection</a>
+            <Link to="/collection">Collection</Link>
           </li>
           <li className="text-[#979a9b] mx-auto lg:mx-0 hover:text-[#212529] duration-300 w-fit">
-            <a href="">Lookbook</a>
+            <Link to="/lookbook">Lookbook</Link>
           </li>
           <li className="text-[#979a9b] mx-auto lg:mx-0 hover:text-[#212529] duration-300 w-fit">
-            <a href="">Sale</a>
+            <Link to="/sale">Sale</Link>
           </li>
         </ul>
       </div>
@@ -23,10 +25,10 @@ function Footer() {
         <h3 className="text-3xl font-semibold mb-6 text-center lg:text-left">About</h3>
         <ul className="text-lg sm:text-xl lg:text-2xl text-center lg:text-left text-[#979a9b]">
           <li className="text-[#979a9b] mx-auto lg:mx-0 hover:text-[#212529] duration-300 w-fit">
-            <a href="">Our Story</a>
+            <Link to="/our-story">Our Story</Link>
           </li>
           <li className="text-[#979a9b] mx-auto lg:mx-0 hover:text-[#212529] duration-300 w-fit">
-            <a href="">Contact</a>
+            <Link to="/contact">Contact</Link>
           </li>
         </ul>
       </div>

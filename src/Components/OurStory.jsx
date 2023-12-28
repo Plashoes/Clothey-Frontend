@@ -1,9 +1,15 @@
+import { useEffect } from "react";
 import Search from "./Search";
 import HowMade from "./HowMade";
 import Features from "./Features";
 import FeaturesSmall from "./FeaturesSmall";
 import Footer from "./Footer";
 function OurStory() {
+  useEffect(() => {
+    document.title = `Clothy | Sale`;
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <>
       <Search />

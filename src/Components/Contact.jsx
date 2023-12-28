@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import Search from "./Search";
 import Features from "./Features";
 import FeaturesSmall from "./FeaturesSmall";
@@ -9,6 +10,11 @@ import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
 function Contact() {
+  useEffect(() => {
+    document.title = `Clothy | Sale`;
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <>
       <Search />

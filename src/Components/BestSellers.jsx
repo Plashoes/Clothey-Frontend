@@ -1,42 +1,25 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import axios from "axios";
 import ProductsGrid from "./ProductsGrid";
 import Skeleton from "@mui/material/Skeleton";
 
 function BestSellers() {
-  const [fetching, setFetching] = useState(false);
+  const URL = "https://clotheyapi-production.up.railway.app/products/filter?size=6";
+  const [fetching, setFetching] = useState(true);
+  const [products, setProducts] = useState([]);
 
-  const cardsInfo = [
-    {
-      imgURL: "/images/recycled-shoe-product-image-004-400x400.jpg",
-      name: "Women's Orange Sneaker",
-      price: "44.90",
-    },
-    {
-      imgURL: "/images/recycled-shoe-product-image-009-400x400.jpg",
-      name: "Women’s Tan Sneaker",
-      price: "80.00",
-    },
-    {
-      imgURL: "/images/recycled-shoe-product-image-011-400x400.jpg",
-      name: "Women’s Peach Training",
-      price: "57.90",
-    },
-    {
-      imgURL: "/images/recycled-shoe-product-image-004-400x400.jpg",
-      name: "Women's Orange Sneaker",
-      price: "44.90",
-    },
-    {
-      imgURL: "/images/recycled-shoe-product-image-009-400x400.jpg",
-      name: "Women’s Tan Sneaker",
-      price: "80.00",
-    },
-    {
-      imgURL: "/images/recycled-shoe-product-image-011-400x400.jpg",
-      name: "Women’s Peach Training",
-      price: "57.90",
-    },
-  ];
+  useEffect(() => {
+    const fetchProducts = async () => {
+      await axios.get(URL)
+      .then((res) => {
+        setProducts(res.data);
+        setFetching(false);
+      })
+      .catch((e) => console.log(e));
+    }
+    fetchProducts();
+  }, [])
+
 
   return (
     <div className="container mx-auto px-6 py-12">
@@ -88,7 +71,7 @@ function BestSellers() {
           </div>
         </div>
       ) : (
-        <ProductsGrid cardsInfo={cardsInfo} />
+        <ProductsGrid cardsInfo={products} />
       )}
     </div>
   );
