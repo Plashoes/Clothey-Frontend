@@ -18,7 +18,7 @@ function Product() {
   const [type, setType] = useState();
 
   useEffect(() => {
-    document.title = `Clothy | ${name}`;
+    document.title = `Clothy | ${fetching ? "" : name}`;
     window.scrollTo(0, 0);
   }, [name]);
 
