@@ -11,7 +11,7 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
 function Contact() {
   useEffect(() => {
-    document.title = `Clothy | Sale`;
+    document.title = `Clothy | Contact`;
     window.scrollTo(0, 0);
   }, []);
 

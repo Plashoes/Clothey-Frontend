@@ -23,13 +23,8 @@ function Cart() {
             <i className="fa-solid fa-x text-3xl "></i>
           </button>
           <ul className="text-[#979a9b] ">
-            {/* <Link to="/login" onClick={toggleMenu(false)}>
-              <li className="text-xl border-b-2 border-[#e6e6e6] px-8 py-4 hover:text-[#212529] duration-300">
-                <i className="fa-solid fa-user text"></i>
-              </li>
-            </Link> */}
             {appState.loggedIn ? (
-              <Link to="/profile" onClick={toggleMenu(false)}>
+              <Link to={`/profile/${localStorage.getItem("firstName") + localStorage.getItem("lastName")}`} onClick={toggleMenu(false)}>
                 <li className="text-xl border-b-2 border-[#e6e6e6] px-8 py-4 hover:text-[#212529] duration-300">
                   <i className="fa-solid fa-user lg:text-lg xl:text-3xl cursor-pointer"></i>
                 </li>
@@ -41,7 +36,7 @@ function Cart() {
                 </li>
               </Link>
             )}
-            <Link to="/collection" onClick={toggleMenu(false)}>
+            <Link to="/collection/all" onClick={toggleMenu(false)}>
               <li className="text-xl border-b-2 border-[#e6e6e6] px-8 py-4 hover:text-[#212529] duration-300">
                 <p>COLLECTION</p>
               </li>

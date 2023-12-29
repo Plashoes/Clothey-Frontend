@@ -16,7 +16,7 @@ function Header() {
 
         <ul className="lg:flex space-x-6 text-[#979a9b] hidden">
           <li className="hover:text-[#212529] duration-300 font-semibold cursor-pointer">
-            <Link to="/collection">
+            <Link to="/collection/all">
               <p>COLLECTION</p>
             </Link>
           </li>
@@ -41,7 +41,7 @@ function Header() {
         </Link>
 
         {appState.loggedIn ? (
-          <Link to="/profile">
+          <Link to={`/profile/${localStorage.getItem("firstName") + localStorage.getItem("lastName")}`}>
             <p className="hidden lg:block ">
               <i className="fa-solid fa-user text-[#212529] lg:text-lg xl:text-3xl cursor-pointer"></i>
             </p>

@@ -6,7 +6,6 @@ import DispatchContext from "../DispatchContext";
 
 import "react-toastify/dist/ReactToastify.css";
 
-
 function Login() {
   const appDispatch = useContext(DispatchContext);
   const navigate = useNavigate();
@@ -21,7 +20,7 @@ function Login() {
       toast.error("Enter Email");
       return;
     }
-    if(!regEmail.test(email)) {
+    if (!regEmail.test(email)) {
       toast.error("Enter Correct Email");
       return;
     }
@@ -34,13 +33,15 @@ function Login() {
       .post(URL, { email, password })
       .then((res) => {
         toast.success("Login Successful!");
-        appDispatch({type: "login"});
-        localStorage.setItem("email", res.data.email);
+        localStorage.setItem("userToken", res.data.authorization_token);
         localStorage.setItem("firstName", res.data.first_name);
         localStorage.setItem("lastName", res.data.last_name);
+        localStorage.setItem("email", res.data.email);
         localStorage.setItem("phoneNumber", res.data.phone_number);
-        localStorage.setItem("userToken", res.data.authorization_token);
-        navigate("/profile");
+        appDispatch({
+          type: "login",
+        });
+        navigate(`/profile/${localStorage.getItem("firstName") + localStorage.getItem("lastName")}`);
       })
       .catch((e) => {
         console.log(e);

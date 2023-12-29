@@ -1,4 +1,5 @@
-import { useContext } from "react";
+import { useContext, useState, useEffect } from "react";
+import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import DispatchContext from "../DispatchContext";
 import Footer from "./Footer";
@@ -7,12 +8,27 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 function Profile() {
+  useEffect(() => {
+    document.title = `Clothy | Profile`;
+    window.scrollTo(0, 0);
+  }, []);
+  const regEmail = /^\w+([\\.-]?\w+)*@\w+([\\.-]?\w+)*(\.\w{2,3})+$/;
+  const regNumbers = /^[0-9]+$/;
+  const url = "https://clotheyapi-production.up.railway.app/users/update";
   const appDispatch = useContext(DispatchContext);
   const navigate = useNavigate();
   const firstName = localStorage.getItem("firstName");
   const lastName = localStorage.getItem("lastName");
   const email = localStorage.getItem("email");
   const phoneNumber = localStorage.getItem("phoneNumber");
+  const userToken = localStorage.getItem("userToken");
+  const [first, setFirst] = useState("");
+  const [last, setLast] = useState("");
+  const [mail, setMail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [password, setPassword] = useState("");
+  const [update1, setUpdate1] = useState(false);
+  const [update2, setUpdate2] = useState(false);
 
   const logout = () => {
     appDispatch({ type: "logout" });
@@ -25,6 +41,62 @@ function Profile() {
     navigate("/");
   };
 
+  const updateGeneral = async () => {
+    let data = {
+      first_name: first,
+      last_name: last
+    }
+    if(first === ""){
+      delete data.first_name;
+    }
+    if(last === ""){
+      delete data.last_name;
+    }
+    if(Object.keys(data).length == 0){
+      return;
+    }      
+    // }
+    // await axios.patch(url, data, {headers: {
+    //   "Authorization": userToken
+    // }}).then((res) => {
+    //   console.log(res);
+    // }).catch((e) => {
+    //   console.log(e);
+    // })
+  }
+
+  const updateSecurity = async () => {
+    let data = {
+      email: mail,
+      phone_number: phone,
+      password
+    }
+    if(mail === ""){
+      delete data.email;
+    }
+    if(mail != "" && !regEmail.test(mail)){
+      toast.error("Enter Correct New Email");
+      return;
+    }
+    if(phone === ""){
+      delete data.phone_number;
+    }
+    if(phone!= "" && (phone.length != 11 || !regNumbers.test(phone))){
+      toast.error("Enter Correct Phone Number");
+      return;
+    }
+    if (password === "") {
+      delete data.password;
+    }
+    if(password != "" && password.length < 8){
+      toast.error("Password Must Be At Least 8 Charecters Long");
+      return;
+    }
+    if(Object.keys(data).length == 0){
+      return;
+    } 
+  }
+
   return (
     <>
       <div className="px-0 md:px-6 py-12 bg-cover bg-center bg-[#f1f1ef]">
@@ -35,28 +107,47 @@ function Profile() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-6 border-b-[1px] border-[#dddddd] pb-3">
             <div>
               <p className="font-bold mb-2">First Name</p>
-              <input className="p-2 block w-full lg:w-[70%] focus:placeholder-transparent placeholder:duration-300 focus:outline-none placeholder:text-[#212529] border-[1px] border-[#dddddd]" type="text" placeholder={firstName} />
+              <input className="p-2 block w-full lg:w-[70%]  focus:outline-none placeholder:text-[#212529] border-[1px] border-[#dddddd]" type="text" placeholder={firstName} onChange={(e) => {
+                setFirst(e.target.value);
+                setUpdate1(true);
+                }} />
             </div>
             <div>
               <p className="font-bold mb-2">Last Name</p>
-              <input className="p-2 block w-full lg:w-[70%] focus:placeholder-transparent placeholder:duration-300 focus:outline-none placeholder:text-[#212529] border-[1px] border-[#dddddd]" type="text" placeholder={lastName} />
+              <input className="p-2 block w-full lg:w-[70%] focus:outline-none placeholder:text-[#212529] border-[1px] border-[#dddddd]" type="text" placeholder={lastName} onChange={(e) => {
+                setLast(e.target.value);
+                setUpdate1(true);
+                }} />
             </div>
             <div className="text-center md:text-left">
-              <button className="mb-6 bg-[#6e7051] hover:bg-[#212529] font-bold text-center text-white duration-300 px-6 py-4 w-full md:w-fit">UPDATE INFO</button>
+              <button disabled={!update1} className={update1 ? "mb-6 bg-[#6e7051] hover:bg-[#212529] font-bold text-center text-white duration-300 px-6 py-4 w-full md:w-fit" : "mb-6 bg-[#f0f1f4]  font-bold text-center text-[#cbcfd7] px-6 py-4 w-full md:w-fit"} onClick={updateGeneral}>UPDATE INFO</button>
             </div>
           </div>
           <h3 className="text-xl font-semibold mb-3">Security</h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-6 border-b-[1px] border-[#dddddd] pb-3">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-6 border-b-[1px] border-[#dddddd] pb-3">
             <div>
               <p className="font-bold mb-2">Email</p>
-              <input className="p-2 block w-full lg:w-[70%] focus:placeholder-transparent placeholder:duration-300 focus:outline-none placeholder:text-[#212529] border-[1px] border-[#dddddd]" type="text" placeholder={email} />
+              <input className="p-2 block w-full focus:outline-none placeholder:text-[#212529] border-[1px] border-[#dddddd]" type="text" placeholder={email} onChange={(e) => {
+                setMail(e.target.value);
+                setUpdate2(true);
+                }} />
             </div>
             <div>
               <p className="font-bold mb-2">Phone Number</p>
-              <input className="p-2 block w-full lg:w-[70%] focus:placeholder-transparent placeholder:duration-300 focus:outline-none placeholder:text-[#212529] border-[1px] border-[#dddddd]" type="text" placeholder={phoneNumber} />
+              <input className="p-2 block w-full focus:outline-none placeholder:text-[#212529] border-[1px] border-[#dddddd]" type="text" placeholder={phoneNumber} onChange={(e) => {
+                setPhone(e.target.value);
+                setUpdate2(true);
+                }} />
+            </div>
+            <div>
+              <p className="font-bold mb-2">Password</p>
+              <input className="p-2 block w-full focus:outline-none placeholder:text-[#212529] border-[1px] border-[#dddddd]" type="password" placeholder="********" onChange={(e) => {
+                setPassword(e.target.value);
+                setUpdate2(true);
+                }} />
             </div>
             <div className="text-center md:text-left">
-              <button className="mb-6 bg-[#6e7051] hover:bg-[#212529] font-bold text-center text-white duration-300 px-6 py-4 w-full md:w-fit">UPDATE INFO</button>
+              <button disabled={!update2} className={update2 ? "mb-6 bg-[#6e7051] hover:bg-[#212529] font-bold text-center text-white duration-300 px-6 py-4 w-full md:w-fit" : "mb-6 bg-[#f0f1f4]  font-bold text-center text-[#cbcfd7] px-6 py-4 w-full md:w-fit"} onClick={updateSecurity}>UPDATE INFO</button>
             </div>
           </div>
           <div className="text-center">

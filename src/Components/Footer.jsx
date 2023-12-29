@@ -11,7 +11,7 @@ function Footer() {
         <h3 className="text-3xl font-semibold mb-6 text-center lg:text-left">Shop</h3>
         <ul className="text-lg sm:text-xl lg:text-2xl text-center lg:text-left flex flex-col space-y-3">
           <li className="text-[#979a9b] mx-auto lg:mx-0 hover:text-[#212529] duration-300 w-fit">
-            <Link to="/collection">Collection</Link>
+            <Link to="/collection/all">Collection</Link>
           </li>
           <li className="text-[#979a9b] mx-auto lg:mx-0 hover:text-[#212529] duration-300 w-fit">
             <Link to="/lookbook">Lookbook</Link>

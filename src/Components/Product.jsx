@@ -15,6 +15,7 @@ function Product() {
   const [image, setImage] = useState();
   const [description, setDescription] = useState();
   const [category, setCategory] = useState();
+  const [categoryID, setCategoryID] = useState();
   const [type, setType] = useState();
 
   useEffect(() => {
@@ -22,26 +23,23 @@ function Product() {
     window.scrollTo(0, 0);
   }, [name]);
 
-  const [productID, setProductID] = useState();
   useEffect(() => {
-    let temp = localStorage.getItem("productID");
-    setProductID(temp);
-  }, []);
-  useEffect(() => {
+    let currentURL = window.location.href;
+    const currentID = currentURL.match(/\d+$/)[0];
     const fetchProduct = async () => {
-      await axios.get(`${URL + productID}`).then((res) => {
+      await axios.get(`${URL + currentID}`).then((res) => {
         setName(res.data.name);
         setPrice(res.data.inventory.price);
         setImage(res.data.main_image);
         setDescription(res.data.description);
         setCategory(res.data.inventory.category.category_name);
+        setCategoryID(res.data.inventory.category.id);
         setType(res.data.inventory.type.type);
         setFetching(false);
       });
     };
-
     fetchProduct();
-  }, [productID]);
+  }, []);
 
   const [count, setCount] = useState(1);
   const increase = () => {
@@ -132,7 +130,7 @@ function Product() {
                 <p className="text-[#979a9b] lg:text-lg mb-4">{description}</p>
                 <h4 className="font-semibold text-[#212529] text-3xl xl:text-4xl my-6">Related Products</h4>
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-8 xl:gap-16">
-                  <Related />
+                  <Related relatedID={categoryID}/>
                 </div>
               </div>
             </div>
