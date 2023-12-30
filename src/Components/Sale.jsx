@@ -1,5 +1,7 @@
-import Search from "./Search";
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import axios from "axios";
+import Search from "./Search";
 import ProductsGrid from "./ProductsGrid";
 import Skeleton from "@mui/material/Skeleton";
 import Features from "./Features";
@@ -7,6 +9,7 @@ import FeaturesSmall from "./FeaturesSmall";
 import Footer from "./Footer";
 
 function Sale() {
+  const URL = "https://clotheyapi-production.up.railway.app/promotions/products";
 
   useEffect(() => {
     document.title = `Clothy | Sale`;
@@ -14,39 +17,19 @@ function Sale() {
   }, []);
 
   const [fetching, setFetching] = useState(false);
+  const [products, setProducts] = useState([]);
 
-  const cardsInfo = [
-    {
-      imgURL: "/images/recycled-shoe-product-image-004-400x400.jpg",
-      name: "Women's Orange Sneaker",
-      price: "44.90",
-    },
-    {
-      imgURL: "/images/recycled-shoe-product-image-009-400x400.jpg",
-      name: "Women’s Tan Sneaker",
-      price: "80.00",
-    },
-    {
-      imgURL: "/images/recycled-shoe-product-image-011-400x400.jpg",
-      name: "Women’s Peach Training",
-      price: "57.90",
-    },
-    {
-      imgURL: "/images/recycled-shoe-product-image-004-400x400.jpg",
-      name: "Women's Orange Sneaker",
-      price: "44.90",
-    },
-    {
-      imgURL: "/images/recycled-shoe-product-image-009-400x400.jpg",
-      name: "Women’s Tan Sneaker",
-      price: "80.00",
-    },
-    {
-      imgURL: "/images/recycled-shoe-product-image-011-400x400.jpg",
-      name: "Women’s Peach Training",
-      price: "57.90",
-    },
-  ];
+  useEffect(() => {
+    const fetchProducts = async () => {
+      await axios.get(URL)
+      .then((res) => {
+        setProducts(res.data);
+        setFetching(false);
+      })
+      .catch((e) => console.log(e));
+    }
+    fetchProducts();
+  }, [])
 
   return (
     <>
@@ -68,10 +51,10 @@ function Sale() {
       </div>
       <div className="container mx-auto px-6 py-12">
         <div className="flex flex-col md:flex-row justify-between items-center mb-4">
-          <h3 className="text-[#212529] text-3xl my-3">Last Pairs</h3>
-          <button className="font-semibold text-[#212529] pb-1 hover:border-[#262b2c] duration-300 border-b-2 border-[#f6aa28]">VIEW ALL PRODUCTS</button>
+          <h3 className="text-[#212529] text-3xl my-3">On Sale</h3>
+          <Link to="/collection/all" className="font-semibold text-[#212529] pb-1 hover:border-[#262b2c] duration-300 border-b-2 border-[#f6aa28]">VIEW ALL PRODUCTS</Link>
         </div>
-        {/* {fetching ? (
+        {fetching ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
             <div>
               <Skeleton variant="rectangle" animation="wave" width="100%" height={250} />
@@ -115,8 +98,8 @@ function Sale() {
             </div>
           </div>
         ) : (
-          <ProductsGrid cardsInfo={cardsInfo} />
-        )} */}
+          <ProductsGrid cardsInfo={products} />
+        )}
       </div>
       <Features />
       <FeaturesSmall />

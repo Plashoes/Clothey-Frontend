@@ -5,7 +5,7 @@ import ProductsGrid from "./ProductsGrid";
 import Skeleton from "@mui/material/Skeleton";
 
 function NewArrivals() {
-  const URL = "https://clotheyapi-production.up.railway.app/products/filter?size=9";
+  const URL = "https://clotheyapi-production.up.railway.app/products/new-arrival";
   const [fetching, setFetching] = useState(true);
   const [products, setProducts] = useState([]);
 

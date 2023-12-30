@@ -5,7 +5,7 @@ import ProductsGrid from "./ProductsGrid";
 import Skeleton from "@mui/material/Skeleton";
 
 function BestSellers() {
-  const URL = "https://clotheyapi-production.up.railway.app/products/filter?size=6";
+  const URL = "https://clotheyapi-production.up.railway.app/products/best-seller";
   const [fetching, setFetching] = useState(true);
   const [products, setProducts] = useState([]);
 

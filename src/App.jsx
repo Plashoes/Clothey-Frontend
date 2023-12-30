@@ -18,6 +18,7 @@ import Sale from "./Components/Sale";
 import Product from "./Components/Product";
 import Profile from "./Components/Profile";
 import SearchResults from "./Components/SearchResults";
+import CartPage from "./Components/CartPage";
 
 import "./App.css";
 
@@ -37,7 +38,7 @@ function App() {
         count: 2,
         price: "79.90",
       },
-    ]
+    ],
   };
 
   function myReducer(draft, action) {
@@ -73,6 +74,7 @@ function App() {
             <Route path="/product/:id" exact element={<Product />} />
             <Route path="/profile/:username" exact element={<Profile />} />
             <Route path="/search/:query" exact element={<SearchResults />} />
+            <Route path="/cart" exact element={<CartPage />} />
           </Routes>
           <ToastContainer autoClose={2500} theme="dark" newestOnTop={true} />
         </Router>

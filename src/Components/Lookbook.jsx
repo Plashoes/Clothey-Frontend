@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { Link } from "react-router-dom";
 import Search from "./Search";
 import Features from "./Features";
 import FeaturesSmall from "./FeaturesSmall";
@@ -24,7 +25,7 @@ function Lookbook() {
         <h2 className="xl:text-center font-semibold text-[#212529] text-3xl xl:text-5xl mb-3 basis-2/4">Fall/Winter 2023</h2>
         <div className="basis-2/4">
           <p className="text-[#979a9b] text-lg xl:text-xl mb-3 xl:w-[75%]">Elementum donec leo vulputate sit proin suspendisse malesuada neque proin gravida ut platea vitae duis hac hac vel id ipsum ultricies ut faucibus ultrices.</p>
-          <button className="font-semibold text-[#212529] pb-1 hover:border-[#262b2c] duration-300 border-b-2 border-[#f6aa28]">SHOP NOW</button>
+          <Link to="/collection/all" className="font-semibold text-[#212529] pb-1 hover:border-[#262b2c] duration-300 border-b-2 border-[#f6aa28]">SHOP NOW</Link>
         </div>
       </div>
       <div className="md:px-8">
@@ -34,7 +35,7 @@ function Lookbook() {
         <h2 className="xl:text-center font-semibold text-[#212529] text-3xl xl:text-5xl mb-3 basis-2/4">Spring/Summer 2023</h2>
         <div className="basis-2/4">
           <p className="text-[#979a9b] text-lg xl:text-xl mb-3 xl:w-[75%]">Elementum donec leo vulputate sit proin suspendisse malesuada neque proin gravida ut platea vitae duis hac hac vel id ipsum ultricies ut faucibus ultrices.</p>
-          <button className="font-semibold text-[#212529] pb-1 hover:border-[#262b2c] duration-300 border-b-2 border-[#f6aa28]">SHOP NOW</button>
+          <Link to="/collection/all" className="font-semibold text-[#212529] pb-1 hover:border-[#262b2c] duration-300 border-b-2 border-[#f6aa28]">SHOP NOW</Link>
         </div>
       </div>
       <div className="md:px-8">
@@ -44,7 +45,7 @@ function Lookbook() {
         <h2 className="xl:text-center font-semibold text-[#212529] text-3xl xl:text-5xl mb-3 basis-2/4">Go & Play</h2>
         <div className="basis-2/4">
           <p className="text-[#979a9b] text-lg xl:text-xl mb-3 xl:w-[75%]">Elementum donec leo vulputate sit proin suspendisse malesuada neque proin gravida ut platea vitae duis hac hac vel id ipsum ultricies ut faucibus ultrices.</p>
-          <button className="font-semibold text-[#212529] pb-1 hover:border-[#262b2c] duration-300 border-b-2 border-[#f6aa28]">SHOP NOW</button>
+          <Link to="/collection/all" className="font-semibold text-[#212529] pb-1 hover:border-[#262b2c] duration-300 border-b-2 border-[#f6aa28]">SHOP NOW</Link>
         </div>
       </div>
       <div className="md:px-8">
@@ -54,7 +55,7 @@ function Lookbook() {
         <h2 className="xl:text-center font-semibold text-[#212529] text-3xl xl:text-5xl mb-3 basis-2/4">Adventurer Gear</h2>
         <div className="basis-2/4">
           <p className="text-[#979a9b] text-lg xl:text-xl mb-3 xl:w-[75%]">Elementum donec leo vulputate sit proin suspendisse malesuada neque proin gravida ut platea vitae duis hac hac vel id ipsum ultricies ut faucibus ultrices.</p>
-          <button className="font-semibold text-[#212529] pb-1 hover:border-[#262b2c] duration-300 border-b-2 border-[#f6aa28]">SHOP NOW</button>
+          <Link to="/collection/all" className="font-semibold text-[#212529] pb-1 hover:border-[#262b2c] duration-300 border-b-2 border-[#f6aa28]">SHOP NOW</Link>
         </div>
       </div>
       <Features />
