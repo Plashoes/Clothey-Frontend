@@ -44,58 +44,87 @@ function Profile() {
   const updateGeneral = async () => {
     let data = {
       first_name: first,
-      last_name: last
-    }
-    if(first === ""){
+      last_name: last,
+    };
+    if (first === "") {
       delete data.first_name;
     }
-    if(last === ""){
+    if (last === "") {
       delete data.last_name;
     }
-    if(Object.keys(data).length == 0){
+    if (Object.keys(data).length == 0) {
       return;
-    }      
-    // }
-    // await axios.patch(url, data, {headers: {
-    //   "Authorization": userToken
-    // }}).then((res) => {
-    //   console.log(res);
-    // }).catch((e) => {
-    //   console.log(e);
-    // })
-  }
+    }
+    await axios
+      .patch(url, data, {
+        headers: {
+          Authorization: userToken,
+        },
+      })
+      .then((res) => {
+        console.log(res);
+        toast.success("Profile Updated!");
+        localStorage.setItem("userToken", res.data.authorization_token);
+        localStorage.setItem("firstName", res.data.first_name);
+        localStorage.setItem("lastName", res.data.last_name);
+        localStorage.setItem("email", res.data.email);
+        localStorage.setItem("phoneNumber", res.data.phone_number);
+        location.reload();
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  };
 
   const updateSecurity = async () => {
     let data = {
       email: mail,
       phone_number: phone,
-      password
-    }
-    if(mail === ""){
+      password,
+    };
+    if (mail === "") {
       delete data.email;
     }
-    if(mail != "" && !regEmail.test(mail)){
+    if (mail != "" && !regEmail.test(mail)) {
       toast.error("Enter Correct New Email");
       return;
     }
-    if(phone === ""){
+    if (phone === "") {
       delete data.phone_number;
     }
-    if(phone!= "" && (phone.length != 11 || !regNumbers.test(phone))){
+    if (phone != "" && (phone.length != 11 || !regNumbers.test(phone))) {
       toast.error("Enter Correct Phone Number");
       return;
     }
     if (password === "") {
       delete data.password;
     }
-    if(password != "" && password.length < 8){
+    if (password != "" && password.length < 8) {
       toast.error("Password Must Be At Least 8 Charecters Long");
       return;
     }
-    if(Object.keys(data).length == 0){
+    if (Object.keys(data).length == 0) {
       return;
-    } 
-  }
+    }
+    await axios
+      .patch(url, data, {
+        headers: {
+          Authorization: userToken,
+        },
+      })
+      .then((res) => {
+        console.log(res);
+        localStorage.setItem("userToken", res.data.authorization_token);
+        localStorage.setItem("firstName", res.data.first_name);
+        localStorage.setItem("lastName", res.data.last_name);
+        localStorage.setItem("email", res.data.email);
+        localStorage.setItem("phoneNumber", res.data.phone_number);
+        location.reload();
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  };
 
   return (
     <>
@@ -107,47 +136,76 @@ function Profile() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-6 border-b-[1px] border-[#dddddd] pb-3">
             <div>
               <p className="font-bold mb-2">First Name</p>
-              <input className="p-2 block w-full lg:w-[70%]  focus:outline-none placeholder:text-[#212529] border-[1px] border-[#dddddd]" type="text" placeholder={firstName} onChange={(e) => {
-                setFirst(e.target.value);
-                setUpdate1(true);
-                }} />
+              <input
+                className="p-2 block w-full lg:w-[70%]  focus:outline-none placeholder:text-[#212529] border-[1px] border-[#dddddd]"
+                type="text"
+                placeholder={firstName}
+                onChange={(e) => {
+                  setFirst(e.target.value);
+                  setUpdate1(true);
+                }}
+              />
             </div>
             <div>
               <p className="font-bold mb-2">Last Name</p>
-              <input className="p-2 block w-full lg:w-[70%] focus:outline-none placeholder:text-[#212529] border-[1px] border-[#dddddd]" type="text" placeholder={lastName} onChange={(e) => {
-                setLast(e.target.value);
-                setUpdate1(true);
-                }} />
+              <input
+                className="p-2 block w-full lg:w-[70%] focus:outline-none placeholder:text-[#212529] border-[1px] border-[#dddddd]"
+                type="text"
+                placeholder={lastName}
+                onChange={(e) => {
+                  setLast(e.target.value);
+                  setUpdate1(true);
+                }}
+              />
             </div>
             <div className="text-center md:text-left">
-              <button disabled={!update1} className={update1 ? "mb-6 bg-[#6e7051] hover:bg-[#212529] font-bold text-center text-white duration-300 px-6 py-4 w-full md:w-fit" : "mb-6 bg-[#f0f1f4]  font-bold text-center text-[#cbcfd7] px-6 py-4 w-full md:w-fit"} onClick={updateGeneral}>UPDATE INFO</button>
+              <button disabled={!update1} className={update1 ? "mb-6 bg-[#6e7051] hover:bg-[#212529] font-bold text-center text-white duration-300 px-6 py-4 w-full md:w-fit" : "mb-6 bg-[#f0f1f4]  font-bold text-center text-[#cbcfd7] px-6 py-4 w-full md:w-fit"} onClick={updateGeneral}>
+                UPDATE INFO
+              </button>
             </div>
           </div>
           <h3 className="text-xl font-semibold mb-3">Security</h3>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-6 border-b-[1px] border-[#dddddd] pb-3">
             <div>
               <p className="font-bold mb-2">Email</p>
-              <input className="p-2 block w-full focus:outline-none placeholder:text-[#212529] border-[1px] border-[#dddddd]" type="text" placeholder={email} onChange={(e) => {
-                setMail(e.target.value);
-                setUpdate2(true);
-                }} />
+              <input
+                className="p-2 block w-full focus:outline-none placeholder:text-[#212529] border-[1px] border-[#dddddd]"
+                type="text"
+                placeholder={email}
+                onChange={(e) => {
+                  setMail(e.target.value);
+                  setUpdate2(true);
+                }}
+              />
             </div>
             <div>
               <p className="font-bold mb-2">Phone Number</p>
-              <input className="p-2 block w-full focus:outline-none placeholder:text-[#212529] border-[1px] border-[#dddddd]" type="text" placeholder={phoneNumber} onChange={(e) => {
-                setPhone(e.target.value);
-                setUpdate2(true);
-                }} />
+              <input
+                className="p-2 block w-full focus:outline-none placeholder:text-[#212529] border-[1px] border-[#dddddd]"
+                type="text"
+                placeholder={phoneNumber}
+                onChange={(e) => {
+                  setPhone(e.target.value);
+                  setUpdate2(true);
+                }}
+              />
             </div>
             <div>
               <p className="font-bold mb-2">Password</p>
-              <input className="p-2 block w-full focus:outline-none placeholder:text-[#212529] border-[1px] border-[#dddddd]" type="password" placeholder="********" onChange={(e) => {
-                setPassword(e.target.value);
-                setUpdate2(true);
-                }} />
+              <input
+                className="p-2 block w-full focus:outline-none placeholder:text-[#212529] border-[1px] border-[#dddddd]"
+                type="password"
+                placeholder="********"
+                onChange={(e) => {
+                  setPassword(e.target.value);
+                  setUpdate2(true);
+                }}
+              />
             </div>
             <div className="text-center md:text-left">
-              <button disabled={!update2} className={update2 ? "mb-6 bg-[#6e7051] hover:bg-[#212529] font-bold text-center text-white duration-300 px-6 py-4 w-full md:w-fit" : "mb-6 bg-[#f0f1f4]  font-bold text-center text-[#cbcfd7] px-6 py-4 w-full md:w-fit"} onClick={updateSecurity}>UPDATE INFO</button>
+              <button disabled={!update2} className={update2 ? "mb-6 bg-[#6e7051] hover:bg-[#212529] font-bold text-center text-white duration-300 px-6 py-4 w-full md:w-fit" : "mb-6 bg-[#f0f1f4]  font-bold text-center text-[#cbcfd7] px-6 py-4 w-full md:w-fit"} onClick={updateSecurity}>
+                UPDATE INFO
+              </button>
             </div>
           </div>
           <div className="text-center">
