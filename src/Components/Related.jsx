@@ -26,7 +26,6 @@ function Related({ relatedID }) {
               </div>
               <div className="text-center p-3">
                 <h5 className="text-[#212529] text-lg sm:text-xl font-bold mb-2">{cardInfo.name}</h5>
-                {/* <p className="text-lg text-[#979a9b]">{`$${cardInfo.inventory.price}`}</p>   */}
                 {cardInfo.promotion ? (
                   <>
                     <div className="flex justify-center items-center space-x-3">

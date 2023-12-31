@@ -19,6 +19,7 @@ import Product from "./Components/Product";
 import Profile from "./Components/Profile";
 import SearchResults from "./Components/SearchResults";
 import CartPage from "./Components/CartPage";
+import Checkout from "./Components/Checkout";
 
 import "./App.css";
 
@@ -75,6 +76,7 @@ function App() {
             <Route path="/profile/:username" exact element={<Profile />} />
             <Route path="/search/:query" exact element={<SearchResults />} />
             <Route path="/cart" exact element={<CartPage />} />
+            <Route path="/checkout" exact element={<Checkout />} />
           </Routes>
           <ToastContainer autoClose={2500} theme="dark" newestOnTop={true} />
         </Router>

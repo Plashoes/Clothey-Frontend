@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import Skeleton from "@mui/material/Skeleton";
 import axios from "axios";
 import Features from "./Features";
@@ -113,7 +114,7 @@ function CartPage() {
                   </>
                 )}
               </div>
-              <button className="bg-[#6e7051] hover:bg-[#212529] font-semibold text-center text-white duration-300 px-6 py-4">Proceed To Checkout</button>
+              <Link to="/checkout" className="bg-[#6e7051] hover:bg-[#212529] font-semibold text-center text-white duration-300 px-6 py-4">Proceed To Checkout</Link>
             </div>
           </div>
         </div>

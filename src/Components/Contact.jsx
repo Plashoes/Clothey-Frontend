@@ -65,15 +65,15 @@ function Contact() {
         <div className="md:w-[50%]">
           <div className="flex flex-col gap-2 mb-6">
             <span className="text-[#9da9b3]">Name</span>
-            <input className="py-2 border-[1px] border-[#dddddd]" type="text" />
+            <input className="py-2 border-[1px] border-[#dddddd] focus:outline-none p-2" type="text" />
           </div>
           <div className="flex flex-col gap-2 mb-6">
             <span className="text-[#9da9b3]">Email</span>
-            <input className="py-2 border-[1px] border-[#dddddd]" type="text" />
+            <input className="py-2 border-[1px] border-[#dddddd] focus:outline-none p-2" type="text" />
           </div>
           <div className="flex flex-col gap-2 mb-6">
             <span className="text-[#9da9b3]">Comment Or Message</span>
-            <textarea className="border-[1px] border-[#dddddd]" name="" id="" cols="30" rows="5"></textarea>
+            <textarea className="border-[1px] border-[#dddddd] focus:outline-none p-2 resize-none" name="" id="" cols="30" rows="5"></textarea>
           </div>
           <button className="text-white font bold py-2 px-8 bg-[#6e7051] hover:bg-[#212529] duration-300">SEND MESSAGE</button>
         </div>

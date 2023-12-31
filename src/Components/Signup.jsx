@@ -86,8 +86,6 @@ function Signup() {
         console.log(e);
         toast.error("Error Occurred Please Try Again");
       });
-    // toast.success("Login Successful");
-    // toast.error("Login Failed");
   };
   return (
     <div className="bg-[#212529]">

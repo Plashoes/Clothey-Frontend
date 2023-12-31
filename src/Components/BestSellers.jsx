@@ -26,7 +26,7 @@ function BestSellers() {
     <div className="container mx-auto px-6 py-12">
       <div className="flex flex-col md:flex-row justify-between items-center mb-4">
         <h3 className="text-[#212529] text-3xl my-3">Our Best Sellers</h3>
-        <Link to="/collection" className="font-semibold text-[#212529] pb-1 hover:border-[#262b2c] duration-300 border-b-2 border-[#f6aa28]">VIEW ALL PRODUCTS</Link>
+        <Link to="/collection/all" className="font-semibold text-[#212529] pb-1 hover:border-[#262b2c] duration-300 border-b-2 border-[#f6aa28]">VIEW ALL PRODUCTS</Link>
       </div>
       {fetching ? (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
