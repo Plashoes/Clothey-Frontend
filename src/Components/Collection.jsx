@@ -11,33 +11,37 @@ import ProductsGrid from "./ProductsGrid";
 function Collection() {
   const [products, setProducts] = useState([]);
   const navigate = useNavigate();
-
-
+  // let currentURL = window.location.href;
+  // let decodedURL = decodeURIComponent(currentURL);
+  // let parts = decodedURL.split("/");
+  // let page = parts[5];
+  const [pageNumber, setPageNumber] = useState(1);
   useEffect(() => {
     document.title = `Clothy | Collection`;
-    window.scrollTo(0, 0);
+    // window.scrollTo(0, 0);
   }, []);
 
   useEffect(() => {
-    let URL = "https://clotheyapi-production.up.railway.app/products/filter";
+    setFetching(true);
     let currentURL = window.location.href;
     let decodedURL = decodeURIComponent(currentURL);
     let parts = decodedURL.split("/");
     const type = parts[parts.length - 1];
+    let URL = `https://clotheyapi-production.up.railway.app/products/filter?page=${pageNumber}&size=12`;
     if (type == "men") {
-      URL = "https://clotheyapi-production.up.railway.app/products/filter?type_id=1";
+      URL = `https://clotheyapi-production.up.railway.app/products/filter?type_id=1&page=${pageNumber}&size=12`;
       document.title = `Clothy | Men's Collection`;
     }
     if (type == "women") {
-      URL = "https://clotheyapi-production.up.railway.app/products/filter?type_id=2";
+      URL = `https://clotheyapi-production.up.railway.app/products/filter?type_id=2&page=${pageNumber}&size=12`;
       document.title = `Clothy | Women's Collection`;
     }
     if (type == "unisex") {
-      URL = "https://clotheyapi-production.up.railway.app/products/filter?type_id=3";
+      URL = `https://clotheyapi-production.up.railway.app/products/filter?type_id=3&page=${pageNumber}&size=12`;
       document.title = `Clothy | Unisex Collection`;
     }
     if (type == "children") {
-      URL = "https://clotheyapi-production.up.railway.app/products/filter?type_id=4";
+      URL = `https://clotheyapi-production.up.railway.app/products/filter?type_id=4&page=${pageNumber}&size=12`;
       document.title = `Clothy | Children's Collection`;
     }
     const fetchProducts = async () => {
@@ -50,7 +54,20 @@ function Collection() {
         .catch((e) => console.log(e));
     };
     fetchProducts();
-  }, []);
+  }, [pageNumber]);
+
+  const nextPage = () => {
+    setPageNumber(pageNumber + 1);
+    window.scrollTo(0, 0);
+  };
+
+  const previousPage = () => {
+    if (pageNumber === 1) {
+      return;
+    }
+    setPageNumber(pageNumber - 1);
+    window.scrollTo(0, 0);
+  };
 
   const [fetching, setFetching] = useState(true);
 
@@ -77,35 +94,34 @@ function Collection() {
     }
     setProducts(tempArray);
   };
-  const handleFilter = (e) =>{
+  const handleFilter = (e) => {
     const selectedValue = e.target.value;
-    if(selectedValue == "all"){
+    if (selectedValue == "all") {
       navigate("/collection/all");
       location.reload();
       return;
     }
-    if(selectedValue == "men"){
+    if (selectedValue == "men") {
       navigate("/collection/men");
       location.reload();
       return;
     }
-    if(selectedValue == "women"){
+    if (selectedValue == "women") {
       navigate("/collection/women");
       location.reload();
       return;
     }
-    if(selectedValue == "unisex"){
+    if (selectedValue == "unisex") {
       navigate("/collection/unisex");
       location.reload();
       return;
     }
-    if(selectedValue == "children"){
+    if (selectedValue == "children") {
       navigate("/collection/children");
       location.reload();
       return;
     }
-  }
-
+  };
 
   return (
     <>
@@ -173,10 +189,34 @@ function Collection() {
                 <Skeleton variant="text" animation="wave" />
                 <Skeleton variant="text" animation="wave" />
               </div>
+              <div>
+                <Skeleton variant="rectangle" animation="wave" width="100%" height={250} />
+                <Skeleton variant="text" animation="wave" />
+                <Skeleton variant="text" animation="wave" />
+              </div>
+              <div>
+                <Skeleton variant="rectangle" animation="wave" width="100%" height={250} />
+                <Skeleton variant="text" animation="wave" />
+                <Skeleton variant="text" animation="wave" />
+              </div>
+              <div>
+                <Skeleton variant="rectangle" animation="wave" width="100%" height={250} />
+                <Skeleton variant="text" animation="wave" />
+                <Skeleton variant="text" animation="wave" />
+              </div>
+              <div>
+                <Skeleton variant="rectangle" animation="wave" width="100%" height={250} />
+                <Skeleton variant="text" animation="wave" />
+                <Skeleton variant="text" animation="wave" />
+              </div>
             </div>
           ) : (
             <ProductsGrid cardsInfo={products} />
           )}
+          <div className="flex justify-center my-6 space-x-5">
+            <button className={pageNumber === 1 ? "text-[#cbcfd7] cursor-default font bold py-2 px-6 bg-[#f0f1f4] duration-300 rounded-3xl" : "text-white font bold py-2 px-6 bg-[#6e7051] hover:bg-[#212529] duration-300 rounded-3xl"} onClick={previousPage}>Previous</button>
+            <button className="text-white font bold py-2 px-6 bg-[#6e7051] hover:bg-[#212529] duration-300 rounded-3xl" onClick={nextPage}>Next</button>
+          </div>
         </div>
       </div>
       <Features />
