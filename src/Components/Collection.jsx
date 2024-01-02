@@ -11,14 +11,10 @@ import ProductsGrid from "./ProductsGrid";
 function Collection() {
   const [products, setProducts] = useState([]);
   const navigate = useNavigate();
-  // let currentURL = window.location.href;
-  // let decodedURL = decodeURIComponent(currentURL);
-  // let parts = decodedURL.split("/");
-  // let page = parts[5];
   const [pageNumber, setPageNumber] = useState(1);
   useEffect(() => {
     document.title = `Clothy | Collection`;
-    // window.scrollTo(0, 0);
+    window.scrollTo(0, 0);
   }, []);
 
   useEffect(() => {

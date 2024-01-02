@@ -36,6 +36,10 @@ function Homepage() {
           <h2 className="text-white text-5xl font-semibold">Women</h2>
           <Link to="/collection/women" className="px-4 py-2 text-white text-xl border-2 border-white hover:text-[#212529] hover:bg-white duration-300">Shop For Women</Link>
         </div>
+        <div className="md:flex-1 xl:py-[140px] bg-cover bg-center flex flex-col space-y-6 justify-center items-center px-12 py-20" style={{ backgroundImage: "url(/images/recycled-shoe-store-shop-women-image-tumbnail.jpg)" }}>
+          <h2 className="text-white text-5xl font-semibold">Children</h2>
+          <Link to="/collection/children" className="px-4 py-2 text-white text-xl border-2 border-white hover:text-[#212529] hover:bg-white duration-300">Shop For Children</Link>
+        </div>
       </div>
       <NewArrivals />
       <Recycle />
