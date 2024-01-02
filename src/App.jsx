@@ -26,20 +26,6 @@ import "./App.css";
 function App() {
   const initialState = {
     loggedIn: Boolean(localStorage.getItem("userToken")),
-    cart: [
-      {
-        name: "Women’s Peach Training",
-        img: "/images/recycled-shoe-product-image-004.jpg",
-        count: 2,
-        price: "79.90",
-      },
-      {
-        name: "Women’s Peach Training",
-        img: "/images/recycled-shoe-product-image-004.jpg",
-        count: 2,
-        price: "79.90",
-      },
-    ],
   };
 
   function myReducer(draft, action) {

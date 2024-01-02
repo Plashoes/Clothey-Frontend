@@ -1,16 +1,28 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import StateContext from "../StateContext";
+import Skeleton from "@mui/material/Skeleton";
 import Search from "./Search";
 import Related from "./Related";
 import Features from "./Features";
 import FeaturesSmall from "./FeaturesSmall";
 import Footer from "./Footer";
-import axios from "axios";
-import Skeleton from "@mui/material/Skeleton";
+import { toast } from "react-toastify";
+
+import "react-toastify/dist/ReactToastify.css";
+
 
 function Product() {
+  const appState = useContext(StateContext);
+  const navigate = useNavigate();
+
   const URL = "https://clotheyapi-production.up.railway.app/products/get-one?id=";
+  const orderURL = "https://clotheyapi-production.up.railway.app/carts/add-to-cart";
   const [fetching, setFetching] = useState(true);
+  const userToken = localStorage.getItem("userToken");
   const [product, setProduct] = useState({});
+  const [count, setCount] = useState(1);
 
   useEffect(() => {
     document.title = `Clothy | ${fetching ? "" : product.name}`;
@@ -28,8 +40,7 @@ function Product() {
     };
     fetchProduct();
   }, []);
-
-  const [count, setCount] = useState(1);
+  
   const increase = () => {
     setCount(count + 1);
   };
@@ -40,6 +51,29 @@ function Product() {
       setCount(count - 1);
     }
   };
+
+  const placeOrder = async () => {
+    if (!appState.loggedIn) {
+      navigate("/login");
+      toast.info("Login To Add Items To Cart")
+      return;
+    }
+    if(count > product.inventory.qty_in_stock){
+      toast.error(`Only ${product.inventory.qty_in_stock} left in stock`);
+      return;
+    }
+    toast.info("Adding To Cart");
+    axios.post(orderURL, {product_id: product.id, quantity: count},{
+      headers: {
+        Authorization: userToken,
+      },
+    }).then(() => {
+      toast.success("Added To Cart Successfully");
+    }).catch((e) => {
+      toast.error("Failed Adding To Cart, Please Try Again");
+      console.log(e);
+    })
+  }
 
   return (
     <>
@@ -95,7 +129,6 @@ function Product() {
               <div className="lg:basis-2/4">
                 <p className="text-[#979a9b] mb-4 xl:text-lg">{`${product.inventory.category.category_name}, ${product.inventory.type.type}`}</p>
                 <h3 className="text-[#212529] font-semibold text-3xl xl:text-5xl mb-4">{product.name}</h3>
-                {/* <p className="text-[#979a9b] mb-4 text-3xl">${price}</p> */}
                 {product.promotion ? (
                   <div className="flex items-center space-x-3">
                     <p className="mb-4 text-3xl text-[#d3d2d2] line-through">{`$${product.inventory.price}`}</p>
@@ -104,6 +137,7 @@ function Product() {
                 ) : (
                   <p className="text-[#979a9b] mb-4 text-3xl">${product.inventory.price}</p>
                 )}
+                <p className="mb-4 text-lg font-semibold">{product.inventory.qty_in_stock} In Stock</p>
                 <div>
                   <div className="flex mb-4">
                     <button onClick={decrease} className="text-[#979a9b] border-[1px] border-[#dddddd] text-lg w-[40px] h-[40px] block">
@@ -113,7 +147,7 @@ function Product() {
                     <button onClick={increase} className="text-[#979a9b] border-[1px] border-[#dddddd] text-lg w-[40px] h-[40px] block">
                       +
                     </button>
-                    <button className="bg-[#6e7051] hover:bg-[#212529] font-semibold text-white duration-300 px-6 py-2 ml-8">ADD TO CART</button>
+                    <button onClick={placeOrder} className="bg-[#6e7051] hover:bg-[#212529] font-semibold text-white duration-300 px-6 py-2 ml-8">ADD TO CART</button>
                   </div>
                 </div>
                 <p className="text-[#979a9b] lg:border-b-[1px] border-[#dddddd] pb-2 xl:text-lg">

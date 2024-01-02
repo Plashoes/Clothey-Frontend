@@ -16,7 +16,7 @@ function Checkout() {
             <h1 className="text-center text-[#212529] font-semibold text-5xl xl:text-6xl mb-6">Checkout</h1>
           </div>
           <div className="flex flex-col items-center justify-center space-y-3">
-            <h3 className="text-center text-3xl font-bold">Customer information</h3>
+            <h3 className="text-center text-3xl font-bold">Customer Information</h3>
             <div className="flex flex-col sm:flex-row sm:space-x-6">
               <div className="flex flex-col space-y-2 mb-5 md:w-[288px]">
                 <span className="sm:text-lg font-semibold text-[#212529]">First Name</span>
@@ -37,7 +37,7 @@ function Checkout() {
                 <input className="text-lg p-3 focus:outline-none border-[1px] border-[#e6e6e6]" placeholder="Phone Number" type="text" />
               </div>
             </div>
-            <h3 className="text-center text-3xl font-bold mb-6">Billing Details</h3>
+            <h3 className="text-center text-3xl font-bold mb-6">Delivery Details</h3>
 
             <div className="flex flex-col sm:flex-row sm:space-x-6">
               <div className="flex flex-col space-y-2 mb-5 md:w-[288px]">

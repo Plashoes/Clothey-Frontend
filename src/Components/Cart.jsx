@@ -1,11 +1,18 @@
-import { useState, useContext } from "react";
+import { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import StateContext from "../StateContext";
+import axios from "axios";
 import Drawer from "@mui/material/SwipeableDrawer";
+import Skeleton from "@mui/material/Skeleton";
 
 function Cart() {
   const appState = useContext(StateContext);
   const [openCart, setOpen] = useState(false);
+  const [cartItems, setCartItems] = useState([]);
+  const userToken = localStorage.getItem("userToken");
+  const url = "https://clotheyapi-production.up.railway.app/carts/get-one";
+  const [fetching, setFetching] = useState(true);
+
   const toggleCart = (openStatus) => (event) => {
     if (event.type === "keydown" && (event.key === "Tab" || event.key === "Shift")) {
       return;
@@ -13,20 +20,31 @@ function Cart() {
     setOpen(openStatus);
   };
 
-  const [count, setCount] = useState();
-  const increase = () => {
-    setCount(count + 1);
-  };
-  const decrease = () => {
-    if (count == 1) {
-      return;
-    } else {
-      setCount(count - 1);
+  useEffect(() => {
+    setFetching(true);
+    const fetchCart = async () => {
+      await axios
+        .get(url, {
+          headers: {
+            Authorization: userToken,
+          },
+        })
+        .then((res) => {
+          setCartItems(res.data.items);
+          setFetching(false);
+        })
+        .catch((e) => {
+          console.log(e);
+        });
+    };
+    if (openCart) {
+      fetchCart();
     }
-  };
+  }, [openCart]);
+
   return (
     <>
-      <p onClick={toggleCart(true)}>
+      <p className={appState.loggedIn ? "block" : "hidden"} onClick={toggleCart(true)}>
         <i className="fa-solid fa-bag-shopping text-[#212529] text-2xl lg:text-lg xl:text-3xl cursor-pointer"></i>
       </p>
       <Drawer anchor="right" open={openCart} onClose={toggleCart(false)} onOpen={toggleCart(true)}>
@@ -38,34 +56,52 @@ function Cart() {
             </button>
           </div>
           <div className="flex-grow pt-3 w-full">
-            {appState.cart.map((details, index) => {
+          {fetching ? (<>
+                  <div className="flex items-center space-x-2 px-6 py-3">
+                    <Skeleton variant="rectangle" animation="wave" width={75} height={75} />
+                    <div>
+                      <Skeleton variant="text" className="w-[100px] sm:w-[400px] md:w-[500px]" animation="wave" />
+                      <Skeleton variant="text" animation="wave" />
+                    </div>
+                  </div>
+                  <div className="flex items-center space-x-2 px-6 py-3">
+                    <Skeleton variant="rectangle" animation="wave" width={75} height={75} />
+                    <div>
+                      <Skeleton variant="text" className="w-[100px] sm:w-[400px] md:w-[500px]" animation="wave" />
+                      <Skeleton variant="text" animation="wave" />
+                    </div>
+                  </div>
+                  <div className="flex items-center space-x-2 px-6 py-3">
+                    <Skeleton variant="rectangle" animation="wave" width={75} height={75} />
+                    <div>
+                      <Skeleton variant="text" className="w-[100px] sm:w-[400px] md:w-[500px]" animation="wave" />
+                      <Skeleton variant="text" animation="wave" />
+                    </div>
+                  </div>
+                </>) : (cartItems.map((item, index) => {
               return (
                 <div className="flex justify-between items-center mb-6" key={index}>
                   <div className="flex items-center space-x-3">
-                    <div className="max-w-[100px]">
-                      <img src={details.img} alt="" />
+                    <div className="max-w-[90px]">
+                      <img src={item.product.main_image} alt="" />
                     </div>
                     <div>
-                      <p className="text-sm sm:text-lg font-semibold mb-3">{details.name}</p>
-                      <div className="flex">
-                        <button onClick={decrease} className="text-[#979a9b] border-[1px] border-[#dddddd] text-lg w-[40px] h-[40px] block">
-                          -
-                        </button>
-                        <span className="text-[#212529] border-[1px] border-[#dddddd] text-lg w-[40px] h-[40px] flex justify-center items-center">{details.count}</span>
-                        <button onClick={increase} className="text-[#979a9b] border-[1px] border-[#dddddd] text-lg w-[40px] h-[40px] block">
-                          +
-                        </button>
-                      </div>
+                      <p className="text-sm sm:text-lg font-semibold mb-3">{item.product.name}</p>
                     </div>
                   </div>
                   <div className="">
-                    <div className="">
-                      <p className="text-sm sm:text-lg font-semibold">${details.price * details.count}</p>
+                    <div className="flex items-center space-x-2">
+                      <p className="text-sm sm:text-lg font-semibold">Price: </p>
+                      <p className="text-sm sm:text-lg font-semibold">${item.product.inventory.price}</p>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <p className="text-sm sm:text-lg font-semibold">Quantity: </p>
+                      <p className="text-sm sm:text-lg font-semibold">{item.quantity}</p>
                     </div>
                   </div>
                 </div>
               );
-            })}
+            }))}
           </div>
           <Link to="/cart" className="mb-6 bg-[#6e7051] hover:bg-[#212529] font-semibold text-center text-white duration-300 px-6 py-4" onClick={toggleCart(false)}>
             View cart

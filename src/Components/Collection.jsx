@@ -215,7 +215,7 @@ function Collection() {
           )}
           <div className="flex justify-center my-6 space-x-5">
             <button className={pageNumber === 1 ? "text-[#cbcfd7] cursor-default font bold py-2 px-6 bg-[#f0f1f4] duration-300 rounded-3xl" : "text-white font bold py-2 px-6 bg-[#6e7051] hover:bg-[#212529] duration-300 rounded-3xl"} onClick={previousPage}>Previous</button>
-            <button className="text-white font bold py-2 px-6 bg-[#6e7051] hover:bg-[#212529] duration-300 rounded-3xl" onClick={nextPage}>Next</button>
+            <button className={products.length < 12 ? "text-[#cbcfd7] cursor-default font bold py-2 px-6 bg-[#f0f1f4] duration-300 rounded-3xl" : "text-white font bold py-2 px-6 bg-[#6e7051] hover:bg-[#212529] duration-300 rounded-3xl"} onClick={products.length < 12 ? null : nextPage}>Next</button>
           </div>
         </div>
       </div>

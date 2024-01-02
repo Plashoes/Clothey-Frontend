@@ -7,26 +7,43 @@ import FeaturesSmall from "./FeaturesSmall";
 import Footer from "./Footer";
 
 function CartPage() {
-  let URL = "https://clotheyapi-production.up.railway.app/products/filter?size=4";
+  const userToken = localStorage.getItem("userToken");
+  let url = "https://clotheyapi-production.up.railway.app/carts/get-one";
   const [products, setProducts] = useState([]);
   const [fetching, setFetching] = useState(true);
+  const [totalPrice, setTotalPrice] = useState(0);
   useEffect(() => {
     document.title = `Clothy | Cart`;
     window.scrollTo(0, 0);
   }, []);
 
   useEffect(() => {
-    const fetchProducts = async () => {
+    const fetchCart = async () => {
       await axios
-        .get(URL)
+        .get(url, {
+          headers: {
+            Authorization: userToken,
+          },
+        })
         .then((res) => {
-          setProducts(res.data);
+          setProducts(res.data.items);
           setFetching(false);
         })
-        .catch((e) => console.log(e));
+        .catch((e) => {
+          console.log(e);
+        });
     };
-    fetchProducts();
+    fetchCart();
   }, []);
+
+  useEffect(() => {
+    if (products.length > 0) {
+      const total = products.reduce((acc, item) => acc + (item.product.inventory.price * item.quantity), 0);
+      setTotalPrice(total);
+    }else{
+      setTotalPrice(0);
+    }
+  }, [products])
 
   return (
     <>
@@ -70,18 +87,18 @@ function CartPage() {
                     <div className="flex flex-col lg:flex-row space-x-2 space-y-2 lg:space-y-0 justify-between items-center border-[1px] border-t-0 px-6 py-3 border-[#e6e6e6]" key={index}>
                       <div className="flex flex-col sm:flex-row space-x-3 items-center lg:w-[55%]">
                         <div className="mb-3 sm:mb-0">
-                          <img className="w-[75px]" src={product.main_image} alt="" />
+                          <img className="w-[75px]" src={product.product.main_image} alt="" />
                         </div>
-                        <p className="text-[#212529] text-sm sm:text-base">{product.name}</p>
+                        <p className="text-[#212529] text-sm sm:text-base">{product.product.name}</p>
                       </div>
                       <div className="text-center lg:w-[100px]">
-                        <p className="text-[#212529] text-sm sm:text-base">Price: ${product.inventory.price}</p>
+                        <p className="text-[#212529] text-sm sm:text-base">Price: ${product.product.inventory.price}</p>
                       </div>
                       <div className="text-center lg:w-[100px]">
-                        <p className="text-[#212529] text-sm sm:text-base">Quantity: 2</p>
+                        <p className="text-[#212529] text-sm sm:text-base">Quantity: {product.quantity}</p>
                       </div>
                       <div className="text-center lg:w-[120px]">
-                        <p className="text-[#212529] text-sm sm:text-base">Subtotal: ${product.inventory.price * 2}</p>
+                        <p className="text-[#212529] text-sm sm:text-base">Subtotal: ${product.product.inventory.price * product.quantity}</p>
                       </div>
                     </div>
                   );
@@ -103,18 +120,16 @@ function CartPage() {
                   </div>
                 ) : (
                   <>
-                    <div className="flex justify-between space-x-4 px-8 py-2 text-[#979a9b] font-semibold border-b-[1px] border-[#e6e6e6]">
-                      <p className="text-lg">Subtotal</p>
-                      <p className="text-lg">$1000</p>
-                    </div>
                     <div className="flex justify-between space-x-2 px-8 py-2 text-[#979a9b] font-semibold">
                       <p className="text-lg">Total</p>
-                      <p className="text-lg">$1000</p>
+                      <p className="text-lg">${totalPrice}</p>
                     </div>
                   </>
                 )}
               </div>
-              <Link to="/checkout" className="bg-[#6e7051] hover:bg-[#212529] font-semibold text-center text-white duration-300 px-6 py-4">Proceed To Checkout</Link>
+              <Link to="/checkout" className="bg-[#6e7051] hover:bg-[#212529] font-semibold text-center text-white duration-300 px-6 py-4">
+                Proceed To Checkout
+              </Link>
             </div>
           </div>
         </div>
