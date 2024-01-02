@@ -82,36 +82,8 @@ function Cart() {
                 );
               })
             )}
-            {/* {cartItems && cartItems.length === 0  ? (
-                <p className="text-center text-2xl font-semibold mt-20">Cart Is Empty</p>
-            ) : (
-              cartItems.map((item, index) => {
-                return (
-                  <div className="flex justify-between items-center mb-6" key={index}>
-                    <div className="flex items-center space-x-3">
-                      <div className="max-w-[90px]">
-                        <img src={item.product.main_image} alt="" />
-                      </div>
-                      <div>
-                        <p className="text-sm sm:text-lg font-semibold mb-3">{item.product.name}</p>
-                      </div>
-                    </div>
-                    <div className="">
-                      <div className="flex items-center space-x-2">
-                        <p className="text-sm sm:text-lg font-semibold">Price: </p>
-                        <p className="text-sm sm:text-lg font-semibold">${item.product.inventory.price}</p>
-                      </div>
-                      <div className="flex items-center space-x-2">
-                        <p className="text-sm sm:text-lg font-semibold">Quantity: </p>
-                        <p className="text-sm sm:text-lg font-semibold">{item.quantity}</p>
-                      </div>
-                    </div>
-                  </div>
-                );
-              })
-            )} */}
           </div>
-          <Link to="/cart" className="mb-6 bg-[#6e7051] hover:bg-[#212529] font-semibold text-center text-white duration-300 px-6 py-4" onClick={toggleCart(false)}>
+          <Link to="/cart" className={cartItems === null || !Array.isArray(cartItems) ? "hidden" : "mb-6 bg-[#6e7051] hover:bg-[#212529] font-semibold text-center text-white duration-300 px-6 py-4"} onClick={toggleCart(false)}>
             View cart
           </Link>
           <Link to="/collection/all" className="mb-6 bg-[#6e7051] hover:bg-[#212529] font-semibold text-center text-white duration-300 px-6 py-4" onClick={toggleCart(false)}>
