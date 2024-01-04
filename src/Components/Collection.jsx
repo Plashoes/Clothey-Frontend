@@ -7,11 +7,15 @@ import Features from "./Features";
 import FeaturesSmall from "./FeaturesSmall";
 import Footer from "./Footer";
 import ProductsGrid from "./ProductsGrid";
+import Pagination from "@mui/material/Pagination";
+import Stack from "@mui/material/Stack";
 
 function Collection() {
   const [products, setProducts] = useState([]);
   const navigate = useNavigate();
   const [pageNumber, setPageNumber] = useState(1);
+  const [fetching, setFetching] = useState(true);
+  const [numberOfPages, setNumberOfPages] = useState();
   useEffect(() => {
     document.title = `Clothy | Collection`;
     window.scrollTo(0, 0);
@@ -44,7 +48,8 @@ function Collection() {
       await axios
         .get(URL)
         .then((res) => {
-          setProducts(res.data);
+          setProducts(res.data.products);
+          setNumberOfPages(res.data.pages);
           setFetching(false);
         })
         .catch((e) => console.log(e));
@@ -52,20 +57,10 @@ function Collection() {
     fetchProducts();
   }, [pageNumber]);
 
-  const nextPage = () => {
-    setPageNumber(pageNumber + 1);
+  const changePage = (event, value) => {
+    setPageNumber(value);
     window.scrollTo(0, 0);
-  };
-
-  const previousPage = () => {
-    if (pageNumber === 1) {
-      return;
-    }
-    setPageNumber(pageNumber - 1);
-    window.scrollTo(0, 0);
-  };
-
-  const [fetching, setFetching] = useState(true);
+  }
 
   const select = useRef(null);
 
@@ -210,8 +205,15 @@ function Collection() {
             <ProductsGrid cardsInfo={products} />
           )}
           <div className="flex justify-center my-6 space-x-5">
-            <button className={pageNumber === 1 ? "text-[#cbcfd7] cursor-default font bold py-2 px-6 bg-[#f0f1f4] duration-300 rounded-3xl" : "text-white font bold py-2 px-6 bg-[#6e7051] hover:bg-[#212529] duration-300 rounded-3xl"} onClick={previousPage}>Previous</button>
-            <button className={products.length < 12 ? "text-[#cbcfd7] cursor-default font bold py-2 px-6 bg-[#f0f1f4] duration-300 rounded-3xl" : "text-white font bold py-2 px-6 bg-[#6e7051] hover:bg-[#212529] duration-300 rounded-3xl"} onClick={products.length < 12 ? null : nextPage}>Next</button>
+            {/* <button className={pageNumber === 1 ? "text-[#cbcfd7] cursor-default font bold py-2 px-6 bg-[#f0f1f4] duration-300 rounded-3xl" : "text-white font bold py-2 px-6 bg-[#6e7051] hover:bg-[#212529] duration-300 rounded-3xl"} onClick={previousPage}>
+              Previous
+            </button>
+            <button className={products.length < 12 ? "text-[#cbcfd7] cursor-default font bold py-2 px-6 bg-[#f0f1f4] duration-300 rounded-3xl" : "text-white font bold py-2 px-6 bg-[#6e7051] hover:bg-[#212529] duration-300 rounded-3xl"} onClick={products.length < 12 ? null : nextPage}>
+              Next
+            </button> */}
+            <Stack spacing={2}>
+              <Pagination page={pageNumber} onChange={changePage} count={numberOfPages} />
+            </Stack>
           </div>
         </div>
       </div>

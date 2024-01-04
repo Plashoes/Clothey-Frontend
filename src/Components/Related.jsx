@@ -9,7 +9,7 @@ function Related({ relatedID }) {
   useEffect(() => {
     const fetchRelated = async () => {
       axios.get(`${relatedURL + relatedID}`).then((res) => {
-        setRelated(res.data);
+        setRelated(res.data.products);
       });
     };
     fetchRelated();

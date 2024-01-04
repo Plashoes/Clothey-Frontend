@@ -30,12 +30,13 @@ function Product() {
   }, [product]);
 
   useEffect(() => {
+    setFetching(true);
     let currentURL = window.location.href;
     const currentID = currentURL.match(/\d+$/)[0];
     const fetchProduct = async () => {
       await axios.get(`${URL + currentID}`).then((res) => {
         setProduct(res.data);
-        setFetching(false)
+        setFetching(false);
       });
     };
     fetchProduct();

@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import Skeleton from "@mui/material/Skeleton";
 import axios from "axios";
@@ -7,8 +8,10 @@ import FeaturesSmall from "./FeaturesSmall";
 import Footer from "./Footer";
 
 function CartPage() {
+  const navigate = useNavigate();
   const userToken = localStorage.getItem("userToken");
   let url = "https://clotheyapi-production.up.railway.app/carts/get-one";
+  const removeURL = "https://clotheyapi-production.up.railway.app/carts/remove-from-cart?cart_item_id=";
   const [products, setProducts] = useState([]);
   const [fetching, setFetching] = useState(true);
   const [totalPrice, setTotalPrice] = useState(0);
@@ -38,12 +41,12 @@ function CartPage() {
 
   useEffect(() => {
     if (products.length > 0) {
-      const total = products.reduce((acc, item) => acc + (item.product.inventory.price * item.quantity), 0);
+      const total = products.reduce((acc, item) => acc + item.product.inventory.price * item.quantity, 0);
       setTotalPrice(total);
-    }else{
+    } else {
       setTotalPrice(0);
     }
-  }, [products])
+  }, [products]);
 
   return (
     <>
@@ -84,7 +87,7 @@ function CartPage() {
               ) : (
                 products.map((product, index) => {
                   return (
-                    <div className="flex flex-col lg:flex-row space-x-2 space-y-2 lg:space-y-0 justify-between items-center border-[1px] border-t-0 px-6 py-3 border-[#e6e6e6]" key={index}>
+                    <div className="flex flex-col lg:flex-row space-x-2 space-y-2 lg:space-y-0 justify-between items-center border-[1px] border-t-0 px-6 py-3 border-[#e6e6e6] relative" key={index}>
                       <div className="flex flex-col sm:flex-row space-x-3 items-center lg:w-[55%]">
                         <div className="mb-3 sm:mb-0">
                           <img className="w-[75px]" src={product.product.main_image} alt="" />
@@ -104,7 +107,6 @@ function CartPage() {
                   );
                 })
               )}
-              {/*  */}
             </div>
             <div className="border-[1px] border-[#e6e6e6] flex flex-col justify-between">
               <div className="mb-8">

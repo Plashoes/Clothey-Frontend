@@ -10,6 +10,7 @@ function Cart() {
   const [cartItems, setCartItems] = useState(null);
   const userToken = localStorage.getItem("userToken");
   const url = "https://clotheyapi-production.up.railway.app/carts/get-one";
+  const removeURL = "https://clotheyapi-production.up.railway.app/carts/remove-from-cart?cart_item_id=";
 
   const toggleCart = (openStatus) => (event) => {
     if (event.type === "keydown" && (event.key === "Tab" || event.key === "Shift")) {
@@ -38,6 +39,21 @@ function Cart() {
     }
   }, [openCart]);
 
+  const removeFromCart = async (id) => {
+    await axios
+      .delete(`${removeURL}${id}`, {
+        headers: {
+          Authorization: userToken,
+        },
+      })
+      .then((res) => {
+        setOpen(false);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  };
+
   return (
     <>
       <p className={appState.loggedIn ? "block" : "hidden"} onClick={toggleCart(true)}>
@@ -57,11 +73,11 @@ function Cart() {
             ) : !Array.isArray(cartItems) ? (
               <p className="text-center text-2xl font-semibold mt-20">Cart Is Empty</p>
             ) : (
-              cartItems.map((item, index) => {
+              cartItems.map((item) => {
                 return (
-                  <div className="flex justify-between items-center mb-6" key={index}>
+                  <div className="flex justify-between items-center mb-12 relative" key={item.id}>
                     <div className="flex items-center space-x-3">
-                      <div className="max-w-[90px]">
+                      <div className="max-w-[90px] h-[75px]">
                         <img src={item.product.main_image} alt="" />
                       </div>
                       <div>
@@ -77,6 +93,9 @@ function Cart() {
                         <p className="text-sm sm:text-lg font-semibold">Quantity: </p>
                         <p className="text-sm sm:text-lg font-semibold">{item.quantity}</p>
                       </div>
+                    </div>
+                    <div className="absolute right-[-5px] top-[-13px] cursor-pointer" onClick={() => removeFromCart(item.id)}>
+                      <i className="fa-solid fa-xmark text-lg text-[#B23B3B]"></i>
                     </div>
                   </div>
                 );

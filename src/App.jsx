@@ -10,6 +10,8 @@ import Homepage from "./Components/HomePage";
 import Login from "./Components/Login";
 import Signup from "./Components/Signup";
 import ResetPassword from "./Components/ResetPassword";
+import ResetCode from "./Components/ResetCode";
+import NewPassword from "./Components/NewPassword";
 import Collection from "./Components/Collection";
 import Lookbook from "./Components/Lookbook";
 import OurStory from "./Components/OurStory";
@@ -53,6 +55,8 @@ function App() {
             <Route path="/login" exact element={<Login />} />
             <Route path="/signup" exact element={<Signup />} />
             <Route path="/reset-password" exact element={<ResetPassword />} />
+            <Route path="reset-code" exact element={<ResetCode />} />
+            <Route path="new-password" exact element={<NewPassword />} />
             <Route path="/collection/:type" exact element={<Collection />} />
             <Route path="/lookbook" exact element={<Lookbook />} />
             <Route path="/our-story" exact element={<OurStory />} />
