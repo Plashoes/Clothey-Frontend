@@ -13,7 +13,7 @@ function Checkout() {
   const governates = [
     {
       id: 0,
-      governorate: "",
+      governorate: "المحافظة",
     },
     {
       id: 1,

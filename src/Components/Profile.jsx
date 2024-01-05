@@ -15,8 +15,27 @@ function Profile() {
   const regEmail = /^\w+([\\.-]?\w+)*@\w+([\\.-]?\w+)*(\.\w{2,3})+$/;
   const regNumbers = /^[0-9]+$/;
   const url = "https://clotheyapi-production.up.railway.app/users/update";
+  const orderURL = "https://clotheyapi-production.up.railway.app/orders/my-orders";
+  const [orders, setOrders] = useState(null);
+
+  useEffect(() => {
+    const fetchOrders = async () => {
+      await axios.get(orderURL, {
+        headers: {
+          Authorization: userToken,
+        },
+      }).then((res) => {
+        setOrders(res.data);
+      }).catch((e) => {
+        console.log(e);
+      })
+    }
+    fetchOrders();
+  }, [])
+
   const appDispatch = useContext(DispatchContext);
   const navigate = useNavigate();
+
   const firstName = localStorage.getItem("firstName");
   const lastName = localStorage.getItem("lastName");
   const email = localStorage.getItem("email");
@@ -208,6 +227,13 @@ function Profile() {
               </button>
             </div>
           </div>
+          <h1 className="text-[#212529] text-3xl font-bold mb-2">Orders</h1>
+          <p className="mb-6 text-[#979a9b] text-lg">View the delivery status for items and your order history</p>
+          {orders == null ? (
+            <p>Loading...</p>
+          ) : orders.length == 0 ? (
+            <p>You Haven&apos;t Made Any Orders</p>
+          ) : ""}
           <div className="text-center">
             <button className="bg-[#B23B3B] hover:bg-[#6b1d1d] duration-300 py-3 px-6 text-xl text-white" onClick={logout}>
               LOGOUT
