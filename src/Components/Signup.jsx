@@ -80,7 +80,7 @@ function Signup() {
         localStorage.setItem("lastName", res.data.last_name);
         localStorage.setItem("phoneNumber", res.data.phone_number);
         localStorage.setItem("userToken", res.data.authorization_token);
-        navigate("/profile");
+        navigate(`/profile/${localStorage.getItem("firstName") + localStorage.getItem("lastName")}`);
       })
       .catch((e) => {
         console.log(e);

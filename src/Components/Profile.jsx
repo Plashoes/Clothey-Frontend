@@ -129,7 +129,7 @@ function Profile() {
   return (
     <>
       <div className="px-0 md:px-6 py-12 bg-cover bg-center bg-[#f1f1ef]">
-        <div className="container mx-auto bg-white px-6 py-12 ">
+        <div className="container mx-auto bg-white px-6 py-12">
           <h1 className="text-[#212529] text-3xl font-bold mb-2">Profile</h1>
           <p className="mb-6 text-[#979a9b] text-lg">Manage your details and change your password</p>
           <h3 className="text-xl font-semibold mb-3">General Info</h3>
