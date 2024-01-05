@@ -47,7 +47,6 @@ function Collection() {
     fetchProducts();
   }, [pageNumber]);
 
-  console.log(numberOfPages);
 
   const changePage = (event, value) => {
     setPageNumber(value);

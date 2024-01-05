@@ -167,6 +167,7 @@ function Checkout() {
       toast.error("Enter Correct Buildng Number");
       return;
     }
+    toast.info("Confirming Order");
     await axios
       .post(
         url,
@@ -179,9 +180,11 @@ function Checkout() {
       )
       .then((res) => {
         console.log(res);
+        toast.success("Order Confirmed!");
       })
       .catch((e) => {
         console.log(e);
+        toast.error("Confirming Order Failed");
       });
   };
 
@@ -193,8 +196,10 @@ function Checkout() {
             <h1 className="text-center text-[#212529] font-semibold text-5xl xl:text-6xl mb-6">Checkout</h1>
           </div>
           <div className="flex flex-col items-center justify-center space-y-3">
-            <h3 className="text-center text-3xl font-bold mb-6">Delivery Details</h3>
-
+            <div className="mb-6">
+              <h3 className="text-center text-3xl font-bold mb-3">Delivery Details</h3>
+              <p className="sm:text-lg font-semibold text-[#212529]">Payment Is Made On Delivery</p>
+            </div>
             <div className="flex flex-col sm:flex-row sm:space-x-6">
               <div className="flex flex-col space-y-2 mb-5 md:w-[288px]">
                 <span className="sm:text-lg font-semibold text-[#212529]">Governate</span>

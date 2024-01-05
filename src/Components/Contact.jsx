@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Search from "./Search";
 import Features from "./Features";
 import FeaturesSmall from "./FeaturesSmall";
@@ -8,12 +8,44 @@ import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import { toast } from "react-toastify";
+
+import "react-toastify/dist/ReactToastify.css";
+
 
 function Contact() {
   useEffect(() => {
     document.title = `Clothy | Contact`;
     window.scrollTo(0, 0);
   }, []);
+
+  const regEmail = /^\w+([\\.-]?\w+)*@\w+([\\.-]?\w+)*(\.\w{2,3})+$/;
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState(""); 
+
+  const sendMessage = () => {
+    if(name === ""){
+      toast.error("Enter Your Name");
+      return;
+    }
+    if(email === ""){
+      toast.error("Enter Your Email");
+      return;
+    }
+    if (!regEmail.test(email)) {
+      toast.error("Enter Correct Email");
+      return;
+    }
+    if(message === ""){
+      toast.error("Enter Message");
+      return;
+    }
+    setName("");
+    setEmail("");
+    setMessage("");
+    toast.success("Message Sent Successfully")
+  }
 
   return (
     <>
@@ -65,17 +97,17 @@ function Contact() {
         <div className="md:w-[50%]">
           <div className="flex flex-col gap-2 mb-6">
             <span className="text-[#9da9b3]">Name</span>
-            <input className="py-2 border-[1px] border-[#dddddd] focus:outline-none p-2" type="text" />
+            <input value={name} onChange={(e) => setName(e.target.value)} className="py-2 border-[1px] border-[#dddddd] focus:outline-none p-2" type="text" />
           </div>
           <div className="flex flex-col gap-2 mb-6">
             <span className="text-[#9da9b3]">Email</span>
-            <input className="py-2 border-[1px] border-[#dddddd] focus:outline-none p-2" type="text" />
+            <input value={email} onChange={(e) => setEmail(e.target.value)} className="py-2 border-[1px] border-[#dddddd] focus:outline-none p-2" type="text" />
           </div>
           <div className="flex flex-col gap-2 mb-6">
             <span className="text-[#9da9b3]">Comment Or Message</span>
-            <textarea className="border-[1px] border-[#dddddd] focus:outline-none p-2 resize-none" name="" id="" cols="30" rows="5"></textarea>
+            <textarea value={message} onChange={(e) => setMessage(e.target.value)} className="border-[1px] border-[#dddddd] focus:outline-none p-2 resize-none" name="" id="" cols="30" rows="5"></textarea>
           </div>
-          <button className="text-white font bold py-2 px-8 bg-[#6e7051] hover:bg-[#212529] duration-300">SEND MESSAGE</button>
+          <button onClick={sendMessage} className="text-white font bold py-2 px-8 bg-[#6e7051] hover:bg-[#212529] duration-300">SEND MESSAGE</button>
         </div>
       </div>
       <div className="container mx-auto px-6 md:px-16 py-12 bg-white">
