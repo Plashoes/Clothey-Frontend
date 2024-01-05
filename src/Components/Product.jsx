@@ -132,11 +132,11 @@ function Product() {
                 <h3 className="text-[#212529] font-semibold text-3xl xl:text-5xl mb-4">{product.name}</h3>
                 {product.promotion ? (
                   <div className="flex items-center space-x-3">
-                    <p className="mb-4 text-3xl text-[#d3d2d2] line-through">{`$${product.inventory.price}`}</p>
-                    <p className="text-[#979a9b] mb-4 text-3xl">{`$${product.new_price}`}</p>
+                    <p className="mb-4 text-3xl text-[#d3d2d2] line-through">{`${product.inventory.price} EGP`}</p>
+                    <p className="text-[#979a9b] mb-4 text-3xl">{`${product.new_price} EGP`}</p>
                   </div>
                 ) : (
-                  <p className="text-[#979a9b] mb-4 text-3xl">${product.inventory.price}</p>
+                  <p className="text-[#979a9b] mb-4 text-3xl">{product.inventory.price} EGP</p>
                 )}
                 <p className="mb-4 text-lg font-semibold">{product.inventory.qty_in_stock} In Stock</p>
                 <div>

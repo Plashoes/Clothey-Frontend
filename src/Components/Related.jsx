@@ -29,13 +29,13 @@ function Related({ relatedID }) {
                 {cardInfo.promotion ? (
                   <>
                     <div className="flex justify-center items-center space-x-3">
-                      <p className="text-lg text-[#d3d2d2] line-through">{`$${cardInfo.inventory.price}`}</p>
-                      <p className="text-lg text-[#979a9b]">{`$${cardInfo.new_price}`}</p>
+                      <p className="text-lg text-[#d3d2d2] line-through">{`${cardInfo.inventory.price} EGP`}</p>
+                      <p className="text-lg text-[#979a9b]">{`${cardInfo.new_price} EGP`}</p>
                     </div>
                     <span className="absolute flex justify-center items-center top-[-15px] right-[-15px] bg-[#6e7051] w-[50px] h-[50px] rounded-full text-white font-semibold">Sale!</span>
                   </>
                 ) : (
-                  <p className="text-lg text-[#979a9b]">{`$${cardInfo.inventory.price}`}</p>
+                  <p className="text-lg text-[#979a9b]">{`${cardInfo.inventory.price} EGP`}</p>
                 )}
               </div>
             </Link>
