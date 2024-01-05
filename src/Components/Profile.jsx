@@ -230,9 +230,9 @@ function Profile() {
           <h1 className="text-[#212529] text-3xl font-bold mb-2">Orders</h1>
           <p className="mb-6 text-[#979a9b] text-lg">View the delivery status for items and your order history</p>
           {orders == null ? (
-            <p>Loading...</p>
+            <p className="mb-6 font-semibold text-lg">Loading...</p>
           ) : orders.length == 0 ? (
-            <p>You Haven&apos;t Made Any Orders</p>
+            <p className="mb-6 font-semibold text-lg">You Haven&apos;t Made Any Orders</p>
           ) : ""}
           <div className="text-center">
             <button className="bg-[#B23B3B] hover:bg-[#6b1d1d] duration-300 py-3 px-6 text-xl text-white" onClick={logout}>
