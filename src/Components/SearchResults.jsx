@@ -28,7 +28,8 @@ function Collection() {
 
     const fetchProducts = async () => {
       await axios.get(`${URL + searchTerm}`).then((res) => {
-        setProducts(res.data);
+        console.log(res);
+        setProducts(res.data.products);
         setFetching(false);
       }).catch((e) => {
         setFetching(false);
