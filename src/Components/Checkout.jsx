@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import FeaturesSmall from "./FeaturesSmall";
 import Footer from "./Footer";
@@ -7,6 +8,7 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 function Checkout() {
+  const navigate = useNavigate();
   const userToken = localStorage.getItem("userToken");
   const url = "https://clotheyapi-production.up.railway.app/orders/place-order";
   const regNumbers = /^[0-9]+$/;
@@ -181,6 +183,7 @@ function Checkout() {
       .then((res) => {
         console.log(res);
         toast.success("Order Confirmed!");
+        navigate("/");
       })
       .catch((e) => {
         console.log(e);
